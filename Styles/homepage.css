@@ -1,0 +1,59 @@
+html body {
+    padding: 0px;
+    margin: 0px;
+}
+
+header {
+    background-color: #ffd700;
+
+    margin: 0px;
+    padding: 20px 80px;
+    height: 12vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: #9b0000;
+}
+
+button {
+    cursor: pointer;
+    background-color: #9b0000; /* Green */
+    border: none;
+
+    color: white;
+    
+    padding: 15px 30px;
+    border-radius: 10%;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 4px 2px;
+}
+
+.teste {
+    background-image: linear-gradient(to bottom, #ffd700, #Bb0000);
+
+    width: 100vw;
+    height: 71vh;
+}
+
+footer {
+    background-color: #Bb0000;
+
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 12vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer h2 {
+    color: #ffd700;
+}
