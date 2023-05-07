@@ -1,11 +1,11 @@
 # Produtos CIV
 
 ## Sobre
-Desenvolvimento de um site para venda de produtos de sobrevivência na natureza do grupo X para a disciplina de *Introdução ao Desenvolvimento Web (SCC0219)*
+Desenvolvimento de um site para venda de produtos de sobrevivência na natureza para a disciplina de *Introdução ao Desenvolvimento Web (SCC0219)*.
 
 ## Membros
 - Ciro Grossi Falsarella (11795593)
-- Igor
+- Igor Cardozo Martins (10387515)
 - Victor Lucas de Almeida Fernandes (12675399)
 
 ## Índice
