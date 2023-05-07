@@ -1,7 +1,7 @@
 # Produtos CIV
 
 ## Sobre
-Projeto de uma loja online de plantas do Grupo 5 da disciplina de *Introdução ao Desenvolvimento Web (SCC0219)*
+Desenvolvimento de um site para venda de produtos de sobrevivência na natureza do grupo X para a disciplina de *Introdução ao Desenvolvimento Web (SCC0219)*
 
 ## Membros
 - Ciro Grossi Falsarella (11795593)
