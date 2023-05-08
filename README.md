@@ -52,6 +52,8 @@ O Mockup possui:
 - Página do administrador com o CRUD (Cadastro, Leitura, Atualização e Deleção).
 
 ### Diagrama de navegação
+![image](https://user-images.githubusercontent.com/87901904/236721197-1170e2ee-3909-4987-976d-b544b2cb51c3.png
+
 
 ## Comentários Sobre o Código
 
