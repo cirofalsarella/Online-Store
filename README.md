@@ -34,11 +34,8 @@ Desenvolvimento de um site para venda de produtos de sobrevivência na natureza 
 
 ## Descrição do Projeto
 
-O CIV shopping é uma loja de produtos de sobrevivencialismo, como comida e ferramentas. A ideia é um site responsivo e simples, sendo o mais responsivo e direto ao ponto possível. 
-
-O projeto é um site completo, que inclui front-end, back-end e banco de dados. O Frontend utiliza bootstrap, css, html, javascript com VUE framework. A escolha deu-se pela flexibilidade e simplicidade.
-
-Já o backend utiliza Node.js para gerência de produtos, usuários e pedidos. Node foi escolhido para limitarmos todo o projeto a uma única linguagem.
+O CIV shopping é uma loja de produtos de sobrevivencialismo, como comida e ferramentas. A ideia é um site responsivo e simples, sendo o mais responsivo e direto ao ponto possível.  
+Com base nos sites do Mercado Livre, Amazon e Magalu, escolhemos as partes que gostamos e adaptamos para nossa realidade
 
 ### Protótipo
 [Mockup](https://www.figma.com/file/siLObvOLBpuLddesvKvt6G/CIV-Supermercado?type=design&node-id=0-1&t=DhpJVCUC9WX31jai-0)
