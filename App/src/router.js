@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 
-import { Analysis, Home, Product } from "./pages/admin"
+import { Analysis, Home, Product, Edit} from "./pages/admin"
 import { Cart, Item } from "./pages/client"
 import { Profile } from "./pages/user"
 import { Landing, Login, Register } from "./pages/web"
@@ -48,6 +48,10 @@ const rotas = createBrowserRouter([
       {
         path: "/product",
         element: <Product />
+      },
+      {
+        path: "/edit",
+        element: <Edit />
       }
     ]
   }

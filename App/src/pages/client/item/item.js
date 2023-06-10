@@ -98,10 +98,10 @@ const Item = () => {
             </Stack>
           </Card>
             <Button colorScheme='orange' variant='solid'>
-              Adicionar ao carrinho
+              Editar produto
             </Button>
             <Button colorScheme='orange' variant='solid'>
-              Ir para o carrinho
+              Excluir produto
             </Button>
 
           </Stack>
