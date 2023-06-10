@@ -1,4 +1,4 @@
-import { headerContext } from "../../../App"
+import { headerContext, loginContext } from "../../../App"
 import { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -8,12 +8,13 @@ import ImagemLogo from "../../../assets/logo.png"
 
 const delay = ms => new Promise(
   resolve => setTimeout(resolve, ms)
-  );
+);
   
 
 const Login = () => {
   const navigate = useNavigate();
   
+  const setLoginStatus = useContext(loginContext)[1]
   const setHeaderDisplay = useContext(headerContext)
   setHeaderDisplay(false)
 
@@ -29,8 +30,18 @@ const Login = () => {
     setLoading(true)
     await delay(1000);
     
-    if (email !== "admin" || password !== "admin")  setInvalid(true)
-    else  return navigate("/")
+    if ((email !== "admin" || password !== "admin") && (email !== "user" || password !== "user"))  setInvalid(true)
+    else {
+      setHeaderDisplay(true)
+      
+      if (email === "user") {
+        setLoginStatus(1)
+        return navigate("/")
+      }
+      
+      setLoginStatus(2)
+      return navigate("/home")
+    }
     
     setLoading(false)
   }
