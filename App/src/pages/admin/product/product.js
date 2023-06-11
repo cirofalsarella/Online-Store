@@ -2,6 +2,7 @@ import { Box, Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Tex
 import { NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import imagemItem from "../../../assets/proMeal.png"
+import { Link } from "react-router-dom"
 
 
 
@@ -105,9 +106,13 @@ const Product = () => {
             <Button colorScheme='orange' variant='solid'>
               Voltar
             </Button>
+
+            <Link to={"/edit"}>
             <Button colorScheme='orange' variant='solid'>
-              Editar produto
+              Editar Produto
             </Button>
+            </Link>
+
             <Button colorScheme='orange' variant='solid'>
               Excluir produto
             </Button>
