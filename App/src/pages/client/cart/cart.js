@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+
 import { Box, Grid, GridItem, Text, Image, Stack, Heading, Flex } from '@chakra-ui/react';
 import { Input, InputGroup, InputRightElement, NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { Card, CardHeader, CardBody, Button } from '@chakra-ui/react'
@@ -7,7 +10,30 @@ import imagemPix from "../../../assets/pix.png"
 import imagemCartao from "../../../assets/cartao.png"
 import imagemBoleto from "../../../assets/boleto.png"
 
+const delay = ms => new Promise(
+  resolve => setTimeout(resolve, ms)
+);
+
 const Cart = () => {
+  const navigate = useNavigate();
+  const [isLoadingShop, setLoadingShop] = useState(false)
+  const [isLoadingDelivery, setLoadingDelivery] = useState(false)
+
+  const handleDelivery = async event => {
+    setLoadingDelivery(true)
+    console.log("alfa")
+    await delay(1000)
+    setLoadingDelivery(false)
+  }
+
+  const handleShop = async event => {
+    setLoadingShop(true)
+    await delay(1000)
+    setLoadingShop(false)
+
+    navigate("/")
+  }
+
   const products = [
     { id: 1, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
     { id: 2, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
@@ -53,7 +79,9 @@ const Cart = () => {
                     placeholder='Digite o CEP'
                   />
                   <InputRightElement width='4.5rem'>
-                    <Button h='1.75rem' size='sm' padding='1px' colorScheme='orange'  variant='solid'>
+                    <Button h='1.75rem' size='sm' padding='1px' colorScheme='orange'  variant='solid'
+                      isLoading={isLoadingDelivery} loadingText='Loading' onClick={handleDelivery}
+                    >
                       Calcular
                     </Button>
                   </InputRightElement>
@@ -90,7 +118,7 @@ const Cart = () => {
             </CardBody>
           </Card>
 
-          <Button colorScheme='orange' variant='solid'>Finalizar pedido</Button>
+          <Button colorScheme='orange' variant='solid' isLoading={isLoadingShop} loadingText='Loading' onClick={handleShop}>Finalizar pedido</Button>
 
         </Stack>
 

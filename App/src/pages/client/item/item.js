@@ -1,10 +1,45 @@
+import { redirect, useNavigate } from "react-router-dom"
+import { useState } from "react";
+
 import { Box, Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Text, Button } from '@chakra-ui/react'
 import { NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import imagemItem from "../../../assets/proMeal.png"
 
-const Item = () => {
+  const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
+
+  const Item = () => {
+  const navigate = useNavigate();
+
+  const [isLoadingAdd, setLoadingAdd] = useState(false)
+  const [isLoadingCart, setLoadingCart] = useState(false)
+  const [isLoadingDelivery, setLoadingDelivery] = useState(false)
+
+  const handleCart = async event => {
+    setLoadingCart(true)
+    console.log("alfa")
+    await delay(1000)
+    setLoadingCart(false)
+
+    navigate("/cart")
+  }
+
+  const handleDelivery = async event => {
+    setLoadingDelivery(true)
+    console.log("alfa")
+    await delay(1000)
+    setLoadingDelivery(false)
+  }
+
+  const handleAdd = async event => {
+    setLoadingAdd(true)
+    console.log("alfa")
+    await delay(1000)
+    setLoadingAdd(false)
+  }
 
   const property = {
     imageUrl: imagemItem,
@@ -89,7 +124,9 @@ const Item = () => {
                     placeholder='Digite o CEP'
                   />
                   <InputRightElement width='4.5rem'>
-                    <Button h='1.75rem' size='sm' padding='1px'>
+                    <Button h='1.75rem' size='sm' padding='1px'
+                      isLoading={isLoadingDelivery} loadingText='Loading' onClick={handleDelivery}
+                    >
                       Calcular
                     </Button>
                   </InputRightElement>
@@ -97,11 +134,15 @@ const Item = () => {
               </CardBody>
             </Stack>
           </Card>
-            <Button colorScheme='orange' variant='solid'>
-              Editar produto
+            <Button colorScheme='orange' variant='solid'
+              isLoading={isLoadingAdd} loadingText='Loading' onClick={handleAdd}
+            >
+              Adicionar ao carrinho
             </Button>
-            <Button colorScheme='orange' variant='solid'>
-              Excluir produto
+            <Button colorScheme='orange' variant='solid'
+              isLoading={isLoadingCart} loadingText='Loading' onClick={handleCart}
+            >
+              Ir para o carrinho
             </Button>
 
           </Stack>
