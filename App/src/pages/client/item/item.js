@@ -1,14 +1,17 @@
+import { redirect, useNavigate } from "react-router-dom"
+import { useState } from "react";
+
 import { Box, Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Text, Button } from '@chakra-ui/react'
 import { NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import imagemItem from "../../../assets/proMeal.png"
 
-  const delay = ms => new Promise(
-    resolve => setTimeout(resolve, ms)
-  );
+const delay = ms => new Promise(
+  resolve => setTimeout(resolve, ms)
+);
 
-  const Item = () => {
+const Item = () => {
   const navigate = useNavigate();
 
   const [isLoadingAdd, setLoadingAdd] = useState(false)
@@ -47,9 +50,9 @@ import imagemItem from "../../../assets/proMeal.png"
     reviewCount: 34,
     rating: 4,
   }
-  
+
   return (
-    
+
     <Box maxHeight='100%'>
       <Stack direction='row' display="flex" justifyContent="center" alignItems="center">
         <Card
@@ -109,44 +112,44 @@ import imagemItem from "../../../assets/proMeal.png"
         </Card>
         <Box>
           <Stack direction='column' spacing='2'>
-          <Card>
-            <Stack>
-              <CardHeader>
-                <Heading size='md'>Frete</Heading>
-              </CardHeader>
-              <CardBody>
-                <InputGroup size='md'>
-                  <Input
-                    pr='4.5rem'
-                    placeholder='Digite o CEP'
-                  />
-                  <InputRightElement width='4.5rem'>
-                    <Button h='1.75rem' size='sm' padding='1px'
-                      isLoading={isLoadingDelivery} loadingText='Loading' onClick={handleDelivery}
-                    >
-                      Calcular
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </CardBody>
-            </Stack>
-          </Card>
+            <Card>
+              <Stack>
+                <CardHeader>
+                  <Heading size='md'>Frete</Heading>
+                </CardHeader>
+                <CardBody>
+                  <InputGroup size='md'>
+                    <Input
+                      pr='4.5rem'
+                      placeholder='Digite o CEP'
+                    />
+                    <InputRightElement width='4.5rem'>
+                      <Button h='1.75rem' size='sm' padding='1px'
+                              isLoading={isLoadingDelivery} loadingText='Loading' onClick={handleDelivery}
+                      >
+                        Calcular
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                </CardBody>
+              </Stack>
+            </Card>
             <Button colorScheme='orange' variant='solid'
-              isLoading={isLoadingAdd} loadingText='Loading' onClick={handleAdd}
+                    isLoading={isLoadingAdd} loadingText='Loading' onClick={handleAdd}
             >
               Adicionar ao carrinho
             </Button>
             <Button colorScheme='orange' variant='solid'
-              isLoading={isLoadingCart} loadingText='Loading' onClick={handleCart}
+                    isLoading={isLoadingCart} loadingText='Loading' onClick={handleCart}
             >
               Ir para o carrinho
             </Button>
 
           </Stack>
         </Box>
-        </Stack>
-      </Box>
-    );
+      </Stack>
+    </Box>
+  );
 }
 
 export default Item;
