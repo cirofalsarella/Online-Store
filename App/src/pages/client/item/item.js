@@ -1,6 +1,3 @@
-import { redirect, useNavigate } from "react-router-dom"
-import { useState } from "react";
-
 import { Box, Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Text, Button } from '@chakra-ui/react'
 import { NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
