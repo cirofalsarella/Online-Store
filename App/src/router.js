@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 
-import { Analysis, Home, Product, Edit} from "./pages/admin"
+import { Analysis, Home, Product, Edit, Cadastre} from "./pages/admin"
 import { Cart, Item } from "./pages/client"
 import { Profile } from "./pages/user"
 import { Landing, Login, Register } from "./pages/web"
@@ -52,6 +52,10 @@ const rotas = createBrowserRouter([
       {
         path: "/edit",
         element: <Edit />
+      },
+      {
+        path: "/cadastre",
+        element: <Cadastre />
       }
     ]
   }
