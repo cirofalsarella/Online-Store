@@ -1,20 +1,30 @@
-import imagemItem from "../../../assets/proMeal.png"
+import { ItemCard } from "../../../Components";
+import { Flex, Wrap, WrapItem } from "@chakra-ui/react"
 
 
 const Landing = () => {
-  const products = [
-    { id: 1, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
-    { id: 2, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
-    { id: 3, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
-    { id: 4, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
-    { id: 5, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
-    { id: 6, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
-    { id: 7, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
-  ];
+  const selected = localStorage.getItem("selectedProduct");
+  
+  let productList = [];
+  let products = localStorage.getItem('productList');
+  
+  if(products !== null){
+      productList = JSON.parse(products);
+  }
 
 
   return (
-    <div>Landing</div>
+    <Flex direction="column">
+        <Wrap spacing={"20px"} justify={"center"}>
+          {productList.map((product) => {
+            return(
+              <WrapItem width={"200px"}>
+                <ItemCard src={product}/>
+              </WrapItem>
+            )
+          })}
+        </Wrap>
+    </Flex>
   );
 }
 
