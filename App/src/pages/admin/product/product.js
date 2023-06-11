@@ -5,23 +5,20 @@ import imagemItem from "../../../assets/proMeal.png"
 import { Link } from "react-router-dom"
 
 
-
-
 const Product = () => {
-
-  const property = {
-    imageUrl: imagemItem,
-    imageAlt: 'Barra de proteína',
-    title: 'Barra de proteína super calórica',
-    text: 'Barra de proteína super calórica usada por astronautas e militares para a execução de seus exercícios.  Contém 10g de proteína e  1000 kcal.',
-    formattedPrice: 'R$5,00',
-    reviewCount: 34,
-    rating: 4,
+  const index = localStorage.getItem("selectedProduct");
+  let productList = [];
+  let products = localStorage.getItem('productList');
+  if(products !== null){
+      productList = JSON.parse(products);
   }
 
-  return (
+  let prod = productList[index];
 
+  return (
+    
     <Box maxHeight='100%'>
+      <div>{index}</div>
       <Stack direction='row' display="flex" justifyContent="center" alignItems="center">
         <Card
           display={'flex'}
@@ -34,22 +31,22 @@ const Product = () => {
           <Image
             objectFit='cover'
             maxW={{ base: '100%', sm: '200px' }}
-            src={property.imageUrl}
-            alt={property.imageAlt}
+            src={imagemItem}
+            alt={prod.imageAlt}
             padding='5px'
           />
 
           <Stack>
             <CardBody>
-              <Heading size='md'>{property.title}</Heading>
+              <Heading size='md'>{prod.title}</Heading>
 
               <Text py='2'>
-                {property.text}
+                {prod.text}
               </Text>
 
               <Stack direction='row' spacing='4' display='flex' alignItems='center'>
                 <Heading size='sm'>
-                  {property.formattedPrice}
+                  {prod.formattedPrice}
                 </Heading>
                 <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm' maxW='10%'>
                   <NumberInputField />
@@ -68,11 +65,11 @@ const Product = () => {
                   .map((_, i) => (
                     <StarIcon
                       key={i}
-                      color={i < property.rating ? 'teal.500' : 'gray.300'}
+                      color={i < prod.rating ? 'teal.500' : 'gray.300'}
                     />
                   ))}
                 <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-                  {property.reviewCount} reviews
+                  {prod.reviewCount} reviews
                 </Box>
               </Box>
             </CardFooter>
@@ -93,11 +90,11 @@ const Product = () => {
                       .map((_, i) => (
                         <StarIcon
                           key={i}
-                          color={i < property.rating ? 'teal.500' : 'gray.300'}
+                          color={i < prod.rating ? 'teal.500' : 'gray.300'}
                         />
                       ))}
                     <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-                      {property.reviewCount} reviews
+                      {prod.reviewCount} reviews
                     </Box>
                   </Box>
                 </CardBody>

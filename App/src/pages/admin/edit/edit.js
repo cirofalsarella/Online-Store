@@ -16,32 +16,59 @@ import {
 import imagemItem from "../../../assets/proMeal.png";
 
 const Edit = () => {
-  const [productName, setProductName] = useState('');
-  const [productCost, setProductCost] = useState('');
-  const [productDescription, setProductDescription] = useState('');
+  const index = localStorage.getItem("selectedProduct");
+  let productList = [];
+  let products = localStorage.getItem('productList');
+  if(products !== null){
+    productList = JSON.parse(products);
+  }
+  
+  let prod = productList[index];
+  
+  const [productName, setProductName] = useState(prod.title);
+  const [productCost, setProductCost] = useState(prod.formattedPrice);
+  const [productDescription, setProductDescription] = useState(prod.text);
   const [productQuantity, setProductQuantity] = useState(1);
+
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    // Create a new object with the form data
-    const productData = {
-      name: productName,
-      cost: productCost,
-      description: productDescription,
-      quantity: productQuantity,
-    };
+    productList[index].title = productName;
+    productList[index].formattedPrice = productCost;
+    productList[index].text = productDescription;
 
-    // Store the data in local storage or pass it to another page
-    // Example: store in local storage
-    localStorage.setItem('productData', JSON.stringify(productData));
 
-    // Reset the form inputs
-    setProductName('');
-    setProductCost('');
-    setProductDescription('');
-    setProductQuantity(1);
+    localStorage.setItem('productList',JSON.stringify(productList));
+
+
+    window.location.href = "/product";
+
+    // console.log("daasdasda");
+    // // Create a new object with the form data
+    // const productData = {
+    //   name: productName,
+    //   cost: productCost,
+    //   description: productDescription,
+    //   quantity: productQuantity,
+    // };
+
+    // console.log(event);
+    // console.log(productData);
+
+    // // Store the data in local storage or pass it to another page
+    // // Example: store in local storage
+    // localStorage.setItem('productData', JSON.stringify(productData));
+
+    // // Reset the form inputs
+    // setProductName('');
+    // setProductCost('');
+    // setProductDescription('');
+    // setProductQuantity(1);
   };
+
+
+  console.log(prod);
 
   return (
     <Flex justify="center" align="center">
@@ -61,10 +88,10 @@ const Edit = () => {
                   placeholder="Custo do produto"
                   value={productCost}
                   onChange={(e) => setProductCost(e.target.value)}
-                  type="number"
+                  // type="number"
                   step="0.01"
                   min="0"
-                  pattern="^\d+(,\d{0,2})?$" // Pattern to accept comma decimal separator
+                  // pattern="^\d+(,\d{0,2})?$" // Pattern to accept comma decimal separator
                   lang="pt-BR" // Set the language to Brazilian Portuguese for correct number formatting
                 />
                 <Input
@@ -90,13 +117,15 @@ const Edit = () => {
                   </NumberInputStepper>
                 </NumberInput>
               </FormControl>
+            <Button type='submit'  size="lg">Enviar</Button>
             </form>
           </Flex>
 
           <Flex width="20vw" direction="column" justify="space-between" align="center">
             <img src={imagemItem} alt="Description of the image" />
-            <Button size="lg">Enviar</Button>
           </Flex>
+
+          
         </Flex>
       </Card>
     </Flex>

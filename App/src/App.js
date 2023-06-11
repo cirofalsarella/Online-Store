@@ -1,14 +1,18 @@
 import React, { createContext, useState } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
-
-
 import {Header} from "./Components"
+import createMockProducts from './services/createMockProducts';
 
 const headerContext = createContext();
 const loginContext = createContext();
 
+
+
 function App() {
+
+  createMockProducts()
+
   const [headerDisplay, setHeaderDisplay] = useState(true)
   const [loginStatus, setLoginStatus] = useState(0)
     // 0 => no login
@@ -19,8 +23,7 @@ function App() {
   return (
     <ChakraProvider >
       <loginContext.Provider value={[loginStatus, setLoginStatus]}>
-      
-        {headerDisplay && <Header />}
+      {headerDisplay && <Header />}
 
         <headerContext.Provider value={setHeaderDisplay}>
           <Outlet />
