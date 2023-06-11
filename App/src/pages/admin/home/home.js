@@ -1,8 +1,8 @@
 import { Box, Card, CardHeader, CardBody, Flex,CardFooter, Image, Stack, Heading, Text, Button } from '@chakra-ui/react'
-// import { StarIcon } from '@chakra-ui/icons'
+import { StarIcon } from '@chakra-ui/icons'
 import imagemItem from "../../../assets/proMeal.png"
 import { Link } from "react-router-dom"
-// import Counter from '../../../Components/product/Counter'
+import Counter from '../../../Components/product/Counter'
 
 
 const ProductCard = ({imageURL,name, price,id}) => {
