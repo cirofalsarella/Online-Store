@@ -39,7 +39,7 @@ const Edit = () => {
     productList[index].text = productDescription;
 
 
-    localStorage.setItem('productList',JSON.stringify(productList));
+    localStorage.setItem('productList', JSON.stringify(productList));
 
 
     window.location.href = "/product";
