@@ -1,8 +1,8 @@
 import { headerContext } from "../../../App"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Card, Flex, Image, Heading, Input, Button, FormControl, FormLabel, FormErrorMessage, fadeConfig } from "@chakra-ui/react";
+import { Card, Flex, Image, Heading, Input, Button, FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react";
 
 import ImagemLogo from "../../../assets/logo.png"
 
@@ -19,32 +19,67 @@ const Register = () => {
 
   const [isLoading, setLoading] = useState(false)
 
-
   const [email, setEmail] = useState("")
-  // const [onUseEmail, setonUseEmail] = useState(false)
+  const [onUseEmail, setOnUseEmail] = useState(false)
 
-
+  const [cpf, setCpf] = useState("")
+  const [onUseCpf, setOnUseCpf] = useState(false)
+  
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
   const [passwordDifferent, setPasswordDifferent] = useState(false)
 
-  const handleRegistration = async event => {
-    setLoading(true)
-    await delay(1000);
 
-    if (password === passwordConfirmation){
-      setPasswordDifferent(false)
-        // Check if email is already on use
-        // Register account && redirect
-        return navigate("/")
-        
-    } else {
+  const HandleRegistration = async event => {
+    setLoading(true)
+    await delay(1000)
+
+    let userList = JSON.parse(localStorage.getItem('userList'))
+    
+    let isValid = true
+    if (password !== passwordConfirmation) {
+      isValid = false
       setPasswordDifferent(true)
+    }
+    if (userList.find(x => x.email === email)) {
+      isValid = false
+      setOnUseEmail(true)
+    }
+    if (userList.find(x => x.cpf === cpf)) {
+      isValid = false
+      setOnUseCpf(true)
+    }
+
+    
+    if (isValid) {
+      userList.push({
+        "id": userList.length,
+        "username":"",
+        "email":email,
+        "cpf":cpf,
+        "address":"",
+        "password":password,
+        "admin":false
+      })
+      localStorage.setItem('userList', JSON.stringify(userList));
+
+      navigate("/login")
     }
 
     setLoading(false)
   }
 
+  useEffect(() => {
+    setOnUseCpf(false)
+  }, [cpf])
+
+  useEffect(() => {
+    setOnUseEmail(false)
+  }, [email])
+
+  useEffect(() => {
+    setPasswordDifferent(false)
+  }, [password, passwordConfirmation])
 
   return (
     <Flex justify={"center"} align={"center"} height="100vh">
@@ -57,11 +92,17 @@ const Register = () => {
           <Heading padding={"10px"}>CIV</Heading>
         </Flex>
 
-
         <Flex direction={"column"} gap={10} margin={"20px"}>
-          <FormControl>
+          <FormControl isInvalid={onUseEmail}>
             <FormLabel>Email address</FormLabel>
-            <Input type='email' value={email} onChange={ e => setEmail(e.target.value) }/>
+            <Input type="email" value={email} onChange={ e => setEmail(e.target.value) }/>
+            <FormErrorMessage>Email is already is on use.</FormErrorMessage>
+          </FormControl>
+
+          <FormControl isInvalid={onUseCpf}>
+            <FormLabel>CPF</FormLabel>
+            <Input type="number" value={cpf} onChange={ e => setCpf(e.target.value) }/>
+            <FormErrorMessage>CPF already is on use.</FormErrorMessage>
           </FormControl>
 
           <FormControl>
@@ -75,12 +116,12 @@ const Register = () => {
             <FormErrorMessage>The passwords does not match.</FormErrorMessage>
           </FormControl>
 
-          <Button isLoading={isLoading} loadingText='Loading' onClick={handleRegistration}>Register</Button>
+          <Button isLoading={isLoading} loadingText='Loading' onClick={HandleRegistration}>Register</Button>
         </Flex>
 
       </Card>
     </Flex>
-    );
+  );
 }
 
 export default Register;

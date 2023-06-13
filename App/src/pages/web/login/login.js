@@ -29,18 +29,28 @@ const Login = () => {
   const tryLogin = async event => {
     setLoading(true)
     await delay(1000);
+
+    let userList = [];
+    let users = localStorage.getItem('userList');
+    if (users !== null){
+      userList = JSON.parse(users).filter((user) => {
+        return user.email === email && user.password === password
+      });
+    }
     
-    if ((email !== "admin" || password !== "admin") && (email !== "user" || password !== "user"))  setInvalid(true)
+    if (!userList.length)  setInvalid(true)
     else {
+      localStorage.setItem('userId', userList[0].id);
+
       setHeaderDisplay(true)
       
-      if (email === "user") {
-        setLoginStatus(1)
-        return navigate("/")
+      if (userList[0].admin) {
+        setLoginStatus(2)
+        return navigate("/home")
       }
-      
-      setLoginStatus(2)
-      return navigate("/home")
+
+      setLoginStatus(1)
+      return navigate("/")
     }
     
     setLoading(false)
@@ -76,7 +86,7 @@ const Login = () => {
         <Flex justify={"center"}>
           <Text >
             <>Não tem uma conta? </>
-            <Link>Cadastre-se!</Link>
+            <Link to={"/register"}>Cadastre-se!</Link>
           </Text>
         </Flex>
       </Card>
