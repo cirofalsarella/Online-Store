@@ -18,12 +18,14 @@ const Cart = () => {
   const navigate = useNavigate();
   const [isLoadingShop, setLoadingShop] = useState(false)
   const [isLoadingDelivery, setLoadingDelivery] = useState(false)
+  const [isVisibleDelivery, setVisibleDelivery] = useState(null)
 
   const handleDelivery = async event => {
     setLoadingDelivery(true)
     console.log("alfa")
     await delay(1000)
     setLoadingDelivery(false)
+    setVisibleDelivery(Math.random() * 50)
   }
 
   const handleShop = async event => {
@@ -66,29 +68,31 @@ const Cart = () => {
       </Grid>
 
       <Stack direction='column' spacing='2'>
-
-          <Card>
-            <Stack>
-              <CardHeader>
-                <Heading size='md'>Frete</Heading>
-              </CardHeader>
-              <CardBody>
-                <InputGroup size='md'>
-                  <Input
-                    pr='4.5rem'
-                    placeholder='Digite o CEP'
-                  />
-                  <InputRightElement width='4.5rem'>
-                    <Button h='1.75rem' size='sm' padding='1px' colorScheme='orange'  variant='solid'
-                      isLoading={isLoadingDelivery} loadingText='Loading' onClick={handleDelivery}
-                    >
-                      Calcular
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </CardBody>
+        <Card>
+          <CardHeader>
+            <Heading size='md'>Frete</Heading>
+          </CardHeader>
+          <CardBody>
+            <Stack spacing='4'>
+              <InputGroup size='md'>
+                <Input
+                  pr='4.5rem'
+                  placeholder='Digite o CEP'
+                />
+                <InputRightElement width='4.5rem'>
+                  <Button h='1.75rem' size='sm' padding='1px' colorScheme="orange"
+                          isLoading={isLoadingDelivery} loadingText='Loading' onClick={handleDelivery}
+                  >
+                    Calcular
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              <Card>
+                <Text align='center'>{isVisibleDelivery !== null && <p>Valor do frete: R${isVisibleDelivery.toFixed(2)}</p>}</Text>
+              </Card>
             </Stack>
-          </Card>
+          </CardBody>
+        </Card>
 
           <Card>
             <CardHeader>
