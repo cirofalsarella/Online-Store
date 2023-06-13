@@ -17,6 +17,7 @@ const Item = () => {
   const [isLoadingAdd, setLoadingAdd] = useState(false)
   const [isLoadingCart, setLoadingCart] = useState(false)
   const [isLoadingDelivery, setLoadingDelivery] = useState(false)
+  const [isVisibleDelivery, setVisibleDelivery] = useState(null)
 
   const handleCart = async event => {
     setLoadingCart(true)
@@ -32,6 +33,7 @@ const Item = () => {
     console.log("alfa")
     await delay(1000)
     setLoadingDelivery(false)
+    setVisibleDelivery(Math.random() * 50)
   }
 
   const handleAdd = async event => {
@@ -113,26 +115,29 @@ const Item = () => {
         <Box>
           <Stack direction='column' spacing='2'>
             <Card>
-              <Stack>
                 <CardHeader>
                   <Heading size='md'>Frete</Heading>
                 </CardHeader>
                 <CardBody>
-                  <InputGroup size='md'>
-                    <Input
-                      pr='4.5rem'
-                      placeholder='Digite o CEP'
-                    />
-                    <InputRightElement width='4.5rem'>
-                      <Button h='1.75rem' size='sm' padding='1px'
-                              isLoading={isLoadingDelivery} loadingText='Loading' onClick={handleDelivery}
-                      >
-                        Calcular
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
+                  <Stack spacing='4'>
+                    <InputGroup size='md'>
+                      <Input
+                        pr='4.5rem'
+                        placeholder='Digite o CEP'
+                      />
+                      <InputRightElement width='4.5rem'>
+                        <Button h='1.75rem' size='sm' padding='1px' colorScheme="orange"
+                                isLoading={isLoadingDelivery} loadingText='Loading' onClick={handleDelivery}
+                        >
+                          Calcular
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
+                    <Card>
+                      <Text align='center'>{isVisibleDelivery !== null && <p>Valor do frete: R${isVisibleDelivery.toFixed(2)}</p>}</Text>
+                    </Card>
+                  </Stack>
                 </CardBody>
-              </Stack>
             </Card>
             <Button colorScheme='orange' variant='solid'
                     isLoading={isLoadingAdd} loadingText='Loading' onClick={handleAdd}
