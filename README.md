@@ -45,6 +45,7 @@ O Mockup possui:
 - Página principal, com o carrossel de fotos com propaganda e produtos recomendados;
 - Página de descrição do produto, com avaliação e opções de compra;
 - Login, com opção de cadastro;
+- Esqueci a senha;
 - Carrinho, com os itens a serem comprados com diversas opções de pagamento,
 - Página do administrador com o CRUD (Cadastro, Leitura, Atualização e Deleção).
 - Página do administrador com visualização dos dados gerais do sistema
@@ -54,14 +55,19 @@ O Mockup possui:
 
 
 ## Comentários Sobre o Código
+A persistência de dados é feito usando arquivos jsons que ficam localizados junto aos arquivos do navegador utilizado, variando por navegador.
 
 ## Plano de Testes
 
 ## Resultado dos Testes
 
 ## Instalação
+Instale o NPM: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/
+Instale o NodeJS: https://nodejs.org/en/download
+Execute npm build na no arquivo app.js
 
 ## Dificuldades
+A maior dificuldade foi a persistência dos dados, em um primeiro momento pensamos em usar o Context do React, porém pela dificuldades optamos em usar um arquivo JSON com as informações.
 
 ## Comentários
 
