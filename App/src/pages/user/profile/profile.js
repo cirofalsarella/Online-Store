@@ -27,7 +27,7 @@ const Profile = () => {
     setUser(userList[userId])
     setName(user.username)
     setAddress(user.address)
-  }, [userId, name, address])
+  }, [userId])
 
   const handleUpdate = async event => {
     setLoading(true)
