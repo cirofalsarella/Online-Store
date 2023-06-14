@@ -1,23 +1,19 @@
 import { Link } from "react-router-dom"
 
 import { useContext } from "react"
-import { loginContext } from "../../App"
 
 import {
-  Flex, Heading, Image, Icon, Avatar,
-  InputGroup, Input, InputRightElement
+  Flex, Heading, Image, Avatar,
+  // Icon,  InputGroup, Input, InputRightElement
 } from "@chakra-ui/react"
-import { SearchIcon } from '@chakra-ui/icons'
+// import { SearchIcon } from '@chakra-ui/icons'
 
 import ImagemLogo from "../../assets/logo.png"
 
 const Header = () => {
-  const loginStatus = useContext(loginContext)[0]
-  console.log(loginStatus)
-
   return (
     <Flex
-      width={"100vw"} height={"15vh"} padding={"20px"}
+      width={"100%"} height={"15vh"} padding={"20px"}
       justify={"space-between"} align={"center"}
     >
       <Link to={"./"}>
@@ -27,14 +23,16 @@ const Header = () => {
         </Flex>
       </Link>
       
+{/*       
       <InputGroup size="md" width={"30vw"}>
         <Input placeholder="Pesquise produtos ou marcas"/>
         <InputRightElement>
           <Icon as={SearchIcon}/>
         </InputRightElement>
       </InputGroup>
+*/}
 
-    <Link to={loginStatus ? "./profile" : "./login"}>
+    <Link to={"./profile"}>
       <Avatar />
     </Link>
     </Flex>
