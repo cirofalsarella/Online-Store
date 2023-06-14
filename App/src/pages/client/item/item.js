@@ -16,6 +16,7 @@ const Item = () => {
 
   const [isLoadingAdd, setLoadingAdd] = useState(false)
   const [isLoadingCart, setLoadingCart] = useState(false)
+
   const [isLoadingDelivery, setLoadingDelivery] = useState(false)
   const [isVisibleDelivery, setVisibleDelivery] = useState(null)
 
