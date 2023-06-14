@@ -22,11 +22,9 @@ const Profile = () => {
   const [user, setUser] = useState({})
   
   useEffect(() => {
-    console.log("userId " +  String(userId))
-    console.log(user)
     if (userId === "none")  return navigate("/login");
 
-    user(userList[userId])
+    setUser(userList[userId])
     setName(user.username)
     setAddress(user.address)
   }, [userId, name, address])
