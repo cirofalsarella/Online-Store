@@ -14,7 +14,7 @@ const ItemCard = (props) => {
         <Link to={"/item"} onClick={selectItem}>
             <Card height={"300px"} direction={"column"} align={"center"} justify={"space-around"}>
                 <Image src={imagemItem} width={"60%"}/>
-                <Heading size="md">{data.title}</Heading>
+                <Heading size="md" align={"center"}>{data.title}</Heading>
                 <Text>{data.formattedPrice}</Text>
             </Card>
         </Link>
