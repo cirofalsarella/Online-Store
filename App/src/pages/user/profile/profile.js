@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button, Card, Flex, FormControl, FormLabel, Heading, Input, Textarea, Avatar } from "@chakra-ui/react"
 
@@ -10,23 +10,27 @@ const delay = ms => new Promise(
 
 const Profile = () => {
   const navigate = useNavigate();
-
-  let userId = localStorage.getItem("userId");
-  if (userId == null) navigate("/login");
-
-  let userList = [];
-  let users = localStorage.getItem('userList');
-
-  if (users !== null) userList = JSON.parse(users)
-  if (!userList.length) navigate("/login")
-
-  const user = userList[userId]
-  console.log(userList)
   
-  const [name, setName] = useState(user.username)
-  const [address, setAddress] = useState(user.address)
-
+  const [userId, setUserId] = useState(localStorage.getItem("userId"))
+  const [name, setName] = useState("")
+  const [address, setAddress] = useState("")
   const [isLoading, setLoading] = useState(false)
+
+  
+  let userList = JSON.parse(localStorage.getItem('userList'));
+  
+  const [user, setUser] = useState({})
+  
+  useEffect(() => {
+    console.log("userId " +  String(userId))
+    console.log(user)
+    if (userId === "none")  return navigate("/login");
+
+    user(userList[userId])
+    setName(user.username)
+    setAddress(user.address)
+  }, [userId, name, address])
+
   const handleUpdate = async event => {
     setLoading(true)
     await delay(1000)
@@ -38,6 +42,11 @@ const Profile = () => {
     setLoading(false)
 
     if (user.admin) return navigate("/home")
+    return navigate("/")
+  }
+
+  const handleLogout = async event => {
+    localStorage.setItem('userId', "none");
     return navigate("/")
   }
 
@@ -66,9 +75,12 @@ const Profile = () => {
             </FormControl>
           </Flex>
 
-          <Flex width={"20vw"} direction={"column"} justify={"space-between"} align={"center"}>
+          <Flex width={"18vw"} direction={"column"} justify={"space-between"} align={"center"}>
             <Avatar />
-            <Button size={"lg"} isLoading={isLoading} loadingText='Loading' onClick={handleUpdate}>Atualizar</Button>
+            <Flex direction={"column"} >
+              <Button margin={"10px"} size={"lg"} isLoading={isLoading} loadingText='Loading' onClick={handleUpdate}>Atualizar</Button>
+              <Button margin={"10px"} size={"lg"} onClick={handleLogout} color={"red"}>Log Out</Button>
+            </Flex>
           </Flex>
         </Flex>
       </Card>

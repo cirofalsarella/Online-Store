@@ -20,7 +20,13 @@ const Auth = () => {
     }
   ]
 
-  localStorage.setItem('userList', JSON.stringify(userList));
-}
+  if(localStorage.getItem('userList') === null) {
+    localStorage.setItem('userList', JSON.stringify(userList));
+  }
+
+  if (localStorage.getItem('userId') === null) {
+    localStorage.setItem('userId', "none");
+  }
+} 
 
 export default Auth;

@@ -41,6 +41,7 @@ const Login = () => {
     if (!userList.length)  setInvalid(true)
     else {
       localStorage.setItem('userId', userList[0].id);
+      console.log(userList[0].id)
 
       setHeaderDisplay(true)
       
