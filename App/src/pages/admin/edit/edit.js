@@ -6,12 +6,9 @@ import {
   FormControl,
   Heading,
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
 } from '@chakra-ui/react';
+
+import Counter from '../../../Components/product/Counter';
 
 import imagemItem from "../../../assets/proMeal.png";
 
@@ -43,28 +40,6 @@ const Edit = () => {
 
 
     window.location.href = "/product";
-
-    // console.log("daasdasda");
-    // // Create a new object with the form data
-    // const productData = {
-    //   name: productName,
-    //   cost: productCost,
-    //   description: productDescription,
-    //   quantity: productQuantity,
-    // };
-
-    // console.log(event);
-    // console.log(productData);
-
-    // // Store the data in local storage or pass it to another page
-    // // Example: store in local storage
-    // localStorage.setItem('productData', JSON.stringify(productData));
-
-    // // Reset the form inputs
-    // setProductName('');
-    // setProductCost('');
-    // setProductDescription('');
-    // setProductQuantity(1);
   };
 
 
@@ -88,11 +63,9 @@ const Edit = () => {
                   placeholder="Custo do produto"
                   value={productCost}
                   onChange={(e) => setProductCost(e.target.value)}
-                  // type="number"
                   step="0.01"
                   min="0"
-                  // pattern="^\d+(,\d{0,2})?$" // Pattern to accept comma decimal separator
-                  lang="pt-BR" // Set the language to Brazilian Portuguese for correct number formatting
+                  lang="pt-BR"
                 />
                 <Input
                   placeholder="Descrição do produto"
@@ -100,22 +73,10 @@ const Edit = () => {
                   onChange={(e) => setProductDescription(e.target.value)}
                 />
                 <p>Quantidade do produto</p>
-                <NumberInput
-                  step={1}
-                  defaultValue={1}
-                  min={0}
-                  max={30}
-                  size="sm"
-                  maxW="10%"
+
+                <Counter
                   value={productQuantity}
-                  onChange={(value) => setProductQuantity(value)}
-                >
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
+                  onChange={(value) => setProductQuantity(value)}/>
               </FormControl>
             <Button type='submit'  size="lg">Enviar</Button>
             </form>

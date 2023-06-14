@@ -6,12 +6,9 @@ import {
   FormControl,
   Heading,
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
 } from '@chakra-ui/react';
+
+import Counter from '../../../Components/product/Counter';
 
 import imagemItem from "../../../assets/proMeal.png";
 
@@ -73,22 +70,7 @@ const Cadastre = () => {
                   onChange={(e) => setProductDescription(e.target.value)}
                 />
                 <p>Quantidade do produto</p>
-                <NumberInput
-                  step={1}
-                  defaultValue={1}
-                  min={0}
-                  max={30}
-                  size="sm"
-                  maxW="10%"
-                  value={productQuantity}
-                  onChange={(value) => setProductQuantity(value)}
-                >
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
+               <Counter/>
               </FormControl>
             </form>
           </Flex>
