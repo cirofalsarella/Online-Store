@@ -42,7 +42,19 @@ const Cart = () => {
     { id: 3, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00' },
   ];
 
-  return (
+  if (localStorage.length == 0)
+    return (
+      <Flex justify='center'>
+        <Card>
+          <CardBody>
+            <Heading size='md'>Seu carrinho está vazio!</Heading>
+          </CardBody>
+        </Card>
+      </Flex>
+    )
+    
+  
+  else return (
 
     <Flex justify={"center"} align={"center"} gap='4'>
 
