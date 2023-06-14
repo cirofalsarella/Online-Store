@@ -1,9 +1,6 @@
 import { Box, Card, CardHeader, CardBody, Flex,CardFooter, Image, Stack, Heading, Text, Button } from '@chakra-ui/react'
-import { StarIcon } from '@chakra-ui/icons'
 import imagemItem from "../../../assets/proMeal.png"
 import { Link } from "react-router-dom"
-import Counter from '../../../Components/product/Counter'
-
 
 const ProductCard = ({imageURL,name, price,id}) => {
     const selectItem = () =>{
@@ -32,7 +29,7 @@ const ProductCard = ({imageURL,name, price,id}) => {
                 {price}
               </Heading>
               <Button>
-                <Link to={'/product'} onClick={selectItem}>clica aqui vai</Link>
+                <Link to={'/product'} onClick={selectItem}>Selecionar</Link>
               </Button>
             </Stack>
           </CardBody>
