@@ -29,7 +29,7 @@ const ProductCard = ({imageURL,name, price,id}) => {
                 {price}
               </Heading>
               <Button>
-                <Link to={'/product'} onClick={selectItem}>clica aqui vai</Link>
+                <Link to={'/product'} onClick={selectItem}>Selecionar</Link>
               </Button>
             </Stack>
           </CardBody>
