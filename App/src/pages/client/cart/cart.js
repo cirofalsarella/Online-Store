@@ -50,35 +50,40 @@ const Cart = () => {
   }
 
 
-  return (
-    <Flex justify={"center"} gap='4'>
+  if (localStorage.length == 0)
+    return (
+      <Flex justify='center'>
+        <Card>
+          <CardBody>
+            <Heading size='md'>Seu carrinho está vazio!</Heading>
+          </CardBody>
+        </Card>
+      </Flex>
+    )
+    
   
-      {/* Item */}
-      <Stack>
-        {products.map((item) => (
-          <Card padding={"4"}>
-            <Flex alignItems="center" justify='space-between'>
-              <Image src={item.imageUrl} maxW={{ base: '50%', sm: '100px' }}/>
-              
-              <Stack>
-                <Text fontWeight="bold">{item.title}</Text>
-                <Text>{item.price}</Text>
-                <Text>Estoque: {item.stock}</Text>
+  else return (
+
+    <Flex justify={"center"} align={"center"} gap='4'>
+
+      <Grid templateRows="repeat(3, 1fr)" gap={4} justifyContent='center'>
+        {products.map((card) => (
+          <GridItem key={card.id}>
+            <Box p={4} borderWidth="1px" borderRadius="md">
+            <Stack direction='row' display="flex" alignItems="center" justify='space-between'>
+                <Image src={card.imageUrl} maxW={{ base: '50%', sm: '100px' }}/>
+                <Text fontWeight="bold">{card.title}</Text>
+                <Text>{card.price}</Text>
+                <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm' maxW='10%'>
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
               </Stack>
-
-              {/* Ammount selector */}
-              <NumberInput value={item.ammount} min={1} max={30} width='10%'>
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-
-              <DeleteIcon boxSize={6} cursor={"pointer"} onClick={e => handleRemove(item.id)}/>
-
-            </Flex>
-          </Card>
+            </Box>
+          </GridItem>
         ))}
       </Stack>
 

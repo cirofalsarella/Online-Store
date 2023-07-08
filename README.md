@@ -51,7 +51,7 @@ O Mockup possui:
 - Página do administrador com visualização dos dados gerais do sistema
 
 ### Diagrama de navegação
-![fluxo](https://github.com/cirofalsarella/Online-Store/assets/21270299/c192f476-ead4-4165-9c0c-474d0759354d)
+![fluxo2](https://github.com/cirofalsarella/Online-Store/assets/21270299/ff923b80-7d59-49a6-8d9b-4978c881fb5a)
 
 
 ## Comentários Sobre o Código
