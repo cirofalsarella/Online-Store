@@ -18,10 +18,10 @@ const delay = ms => new Promise(
 
 const Cart = () => {
   const [products, setProducts] = useState([
-    { id: 1, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:3, ammount:4 },
-    { id: 2, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:3, ammount:4 },
-    { id: 3, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:3, ammount:4 },
-    { id: 4, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:3, ammount:4 },
+    { id: 1, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:2, ammount:1 },
+    { id: 2, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:4, ammount:1 },
+    { id: 3, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:2, ammount:1 },
+    { id: 4, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:1, ammount:1 },
   ])
 
   const navigate = useNavigate();
@@ -50,40 +50,43 @@ const Cart = () => {
   }
 
 
-  if (localStorage.length == 0)
-    return (
-      <Flex justify='center'>
-        <Card>
-          <CardBody>
-            <Heading size='md'>Seu carrinho está vazio!</Heading>
-          </CardBody>
-        </Card>
-      </Flex>
-    )
-    
+  return (
+    <Flex justify={"center"} gap='4'>
   
-  else return (
-
-    <Flex justify={"center"} align={"center"} gap='4'>
-
-      <Grid templateRows="repeat(3, 1fr)" gap={4} justifyContent='center'>
-        {products.map((card) => (
-          <GridItem key={card.id}>
-            <Box p={4} borderWidth="1px" borderRadius="md">
-            <Stack direction='row' display="flex" alignItems="center" justify='space-between'>
-                <Image src={card.imageUrl} maxW={{ base: '50%', sm: '100px' }}/>
-                <Text fontWeight="bold">{card.title}</Text>
-                <Text>{card.price}</Text>
-                <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm' maxW='10%'>
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
+      {/* Item */}
+      <Stack>
+        {products.map((item) => (
+          <Card padding={"4"}>
+            <Flex alignItems="center" justify='space-between'>
+              <Image src={item.imageUrl} maxW={{ base: '50%', sm: '100px' }}/>
+              
+              <Stack>
+                <Text fontWeight="bold">{item.title}</Text>
+                <Text>{item.price}</Text>
+                <Text>Estoque: {item.stock}</Text>
               </Stack>
-            </Box>
-          </GridItem>
+
+              {/* Ammount selector */}
+              <NumberInput value={item.ammount} min={1} max={item.stock} width='10%'
+                onChange={ e => { 
+                  setProducts(
+                    products.map((product) =>
+                      (product.id === item.id) ? { ...product, ammount:e } : { ...product }
+                    )
+                  );
+                }}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+
+              <DeleteIcon boxSize={6} cursor={"pointer"} onClick={e => handleRemove(item.id)}/>
+
+            </Flex>
+          </Card>
         ))}
       </Stack>
 
