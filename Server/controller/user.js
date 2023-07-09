@@ -1,5 +1,21 @@
 const User = require('../model/user');
 
+exports.auth = async (rec, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email: email, password:password })
+        if (!user) {
+            res.status(404).json({ error:"auth error"});
+            return;
+        }
+
+        res.status(200).json();
+    } catch {
+        res.status(500).json({ error: error });
+    }
+}
+
 exports.post = async (req, res) => {
     const { id, admin, email, cpf, password } = req.body;
 
@@ -23,7 +39,6 @@ exports.post = async (req, res) => {
 
 exports.getById = async (req, res) => {
     const id = req.params.id;
-    console.log(`GET: /users/${id}`);
 
     try {
         const user = await User.findOne({ id: id });
