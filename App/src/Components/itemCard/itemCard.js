@@ -7,7 +7,7 @@ const ItemCard = (props) => {
     const data = props.src
 
     const selectItem = () =>{
-        localStorage.setItem("selectedProduct", data.id);
+        localStorage.setItem("selectedProduct", 3);
     };
 
     return (

@@ -5,6 +5,9 @@ import { Box, Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Tex
 import { NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
+
+import { getItemById } from "../../../services"
+
 import imagemItem from "../../../assets/proMeal.png"
 
 const delay = ms => new Promise(
@@ -12,7 +15,21 @@ const delay = ms => new Promise(
 );
 
 const Item = () => {
+  console.log(localStorage.getItem("selectedProduct"))
   const navigate = useNavigate();
+  const [item, setItem] = useState({ ammount:0, price:0.00, description:"", name:"" })
+  
+  try {
+    getItemById(localStorage.getItem("selectedProduct")).then(data => {setItem(data)})
+  } catch {
+    setItem({
+      ammount:0,
+      price:0.00,
+      description:"",
+      name:""
+
+    })
+  }
 
   const [isLoadingAdd, setLoadingAdd] = useState(false)
   const [isLoadingCart, setLoadingCart] = useState(false)
@@ -22,7 +39,6 @@ const Item = () => {
 
   const handleCart = async event => {
     setLoadingCart(true)
-    console.log("alfa")
     await delay(1000)
     setLoadingCart(false)
 
@@ -31,7 +47,6 @@ const Item = () => {
 
   const handleDelivery = async event => {
     setLoadingDelivery(true)
-    console.log("alfa")
     await delay(1000)
     setLoadingDelivery(false)
     setVisibleDelivery(Math.random() * 50)
@@ -42,16 +57,6 @@ const Item = () => {
     console.log("alfa")
     await delay(1000)
     setLoadingAdd(false)
-  }
-
-  const property = {
-    imageUrl: imagemItem,
-    imageAlt: 'Barra de proteína',
-    title: 'Barra de proteína super calórica',
-    text: 'Barra de proteína super calórica usada por astronautas e militares para a execução de seus exercícios.  Contém 10g de proteína e  1000 kcal.',
-    formattedPrice: 'R$5,00',
-    reviewCount: 34,
-    rating: 4,
   }
 
   return (
@@ -69,22 +74,21 @@ const Item = () => {
           <Image
             objectFit='cover'
             maxW={{ base: '100%', sm: '200px' }}
-            src={property.imageUrl}
-            alt={property.imageAlt}
+            src={imagemItem}
             padding='5px'
           />
 
           <Stack>
             <CardBody>
-              <Heading size='md'>{property.title}</Heading>
+              <Heading size='md'>{item.name}</Heading>
 
               <Text py='2'>
-                {property.text}
+                {item.description}
               </Text>
 
               <Stack direction='row' spacing='4' display='flex' alignItems='center'>
                 <Heading size='sm'>
-                  {property.formattedPrice}
+                  R$ {item.price.toFixed(2)}
                 </Heading>
                 <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm' maxW='10%'>
                   <NumberInputField />
@@ -103,11 +107,11 @@ const Item = () => {
                   .map((_, i) => (
                     <StarIcon
                       key={i}
-                      color={i < property.rating ? 'teal.500' : 'gray.300'}
+                      color={i < item.reviewAvg ? 'teal.500' : 'gray.300'}
                     />
                   ))}
                 <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-                  {property.reviewCount} reviews
+                  {item.reviewCount} reviews
                 </Box>
               </Box>
             </CardFooter>

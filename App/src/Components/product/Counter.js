@@ -4,7 +4,7 @@ import { NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementS
 const Counter  = () => {
 
     return (
-        <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm' maxW='10%'>
+        <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm'  width='100px'>
         <NumberInputField />
         <NumberInputStepper>
           <NumberIncrementStepper />

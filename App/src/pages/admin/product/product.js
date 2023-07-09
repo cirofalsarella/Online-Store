@@ -1,126 +1,76 @@
-import { Box, Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Text, Button } from '@chakra-ui/react'
+import { Flex, Box, Card, CardHeader, CardBody, Image, Stack, Heading, Text, Button } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import imagemItem from "../../../assets/proMeal.png"
-import { Link } from "react-router-dom"
-import Counter from '../../../Components/product/Counter';
+import { useNavigate } from "react-router-dom";
 
+import { getItemById} from "../../../services"
+import { useState } from 'react'
 
 const Product = () => {
-  const index = localStorage.getItem("selectedProduct");
-  let productList = [];
-  let products = localStorage.getItem('productList');
-  if(products !== null){
-      productList = JSON.parse(products);
+  const navigate = useNavigate();
+  const [item, setItem] = useState({ ammount:0, price:0.00, description:"", name:"" })
+  
+  try {
+    getItemById(localStorage.getItem("selectedProduct")).then(data => {setItem(data)})
+  } catch {
+    setItem({
+      ammount:0,
+      price:0.00,
+      description:"",
+      name:""
+
+    })
   }
 
-  let prod = productList[index];
-
   return (
+    <Flex maxHeight='100%' justify={"center"} gap={"4"}>
 
-    <Box maxHeight='100%'>
-      <div>{index}</div>
-      <Stack direction='row' display="flex" justifyContent="center" alignItems="center">
-        <Card
-          display={'flex'}
-          justifyContent={'center'}
-          direction={{ base: 'column', sm: 'row' }}
-          overflow='hidden'
-          variant='outline'
-          maxW='60%'
-        >
-          <Image
-            objectFit='cover'
-            maxW={{ base: '100%', sm: '200px' }}
-            src={imagemItem}
-            alt={prod.imageAlt}
-            padding='5px'
-          />
-
+      <Card padding={"4"} width={"60%"}>
+        <Flex align={"center"} gap={"10"}>
+          <Image src={imagemItem} maxH={"30vh"}/>
+          
           <Stack>
+            <Heading fontWeight="bold">{item.name}</Heading>
+            <Text>R$ {item.price.toFixed(2)}</Text>
+            <Text>{item.description}</Text>
+            <Text>Estoque: {item.stock}</Text>
+          </Stack>
+
+        </Flex>
+      </Card>
+      
+      <Stack>
+        <Card>
+          <Stack>
+            <CardHeader>
+              <Heading size='md'>Avaliação</Heading>
+            </CardHeader>
             <CardBody>
-              <Heading size='md'>{prod.title}</Heading>
-
-              <Text py='2'>
-                {prod.text}
-              </Text>
-
-              <Stack direction='row' spacing='4' display='flex' alignItems='center'>
-                <Heading size='sm'>
-                  {prod.formattedPrice}
-                </Heading>
-                <Counter/>
-              </Stack>
-            </CardBody>
-
-            <CardFooter>
               <Box display='flex' mt='2' alignItems='center'>
-                {Array(5)
-                  .fill('')
-                  .map((_, i) => (
-                    <StarIcon
-                      key={i}
-                      color={i < prod.rating ? 'teal.500' : 'gray.300'}
-                    />
-                  ))}
+                <Flex justify={"center"} align={"center"}>
+                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 1 ? "gold" : "grey"}/>
+                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 2 ? "gold" : "grey"}/>
+                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 3 ? "gold" : "grey"}/>
+                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 4 ? "gold" : "grey"}/>
+                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 5 ? "gold" : "grey"}/>
+                </Flex>
                 <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-                  {prod.reviewCount} reviews
+                  {item.reviewCount} reviews
                 </Box>
               </Box>
-            </CardFooter>
+            </CardBody>
           </Stack>
         </Card>
-        <Box>
-          <Stack direction='column' spacing='2'>
-            <Card>
-              <Stack>
-                <CardHeader>
-                  <Heading size='md'>Avaliação</Heading>
-                </CardHeader>
-                <CardBody>
-                  <p> Parece bom </p>
-                  <Box display='flex' mt='2' alignItems='center'>
-                    {Array(5)
-                      .fill('')
-                      .map((_, i) => (
-                        <StarIcon
-                          key={i}
-                          color={i < prod.rating ? 'teal.500' : 'gray.300'}
-                        />
-                      ))}
-                    <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-                      {prod.reviewCount} reviews
-                    </Box>
-                  </Box>
-                </CardBody>
-              </Stack>
-            </Card>
-            <Link to={"/home"}>
-            <Button colorScheme='orange' variant='solid' sx={{ minWidth: '200px' }} >
-              Voltar
-            </Button>
-            </Link>
+        <Button colorScheme='orange' variant='solid' sx={{ minWidth: '200px' }} onClick={e => {return navigate('/home')}}>
+          Voltar
+        </Button>
 
-            <Link to={"/edit"}>
-            <Button colorScheme='orange' variant='solid' sx={{ minWidth: '200px' }}>
-              Editar Produto
-            </Button>
-            </Link>
+        <Button colorScheme='orange' variant='solid' sx={{ minWidth: '200px' }} onClick={e => {return navigate('/edit')}}>
+          Editar Produto
+        </Button>
 
-            <Button
-              colorScheme='orange' variant='solid' sx={{ minWidth: '200px' }} onClick={() => {
-                console.log(prod);
-                // Remove prod from the productList
-                productList.splice(index, 1);
-                // Update the localStorage with the modified productList
-                localStorage.setItem('productList', JSON.stringify(productList));
-              }}
-            >
-              Excluir produto
-            </Button>
-          </Stack>
-        </Box>
       </Stack>
-    </Box>
+    </Flex>
   );
 }
 

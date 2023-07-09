@@ -3,17 +3,19 @@ import { StarIcon } from "@chakra-ui/icons"
 import imagemItem from "../../../assets/proMeal.png"
 import { useState } from "react"
 
-const HistoricCard = (props) => {
-  const data = props.data
-  const [rating, setRating] = useState(4)
+import { getHistoric, updateHistoric } from "../../../services"
+
+const HistoricCard = (product) => {
+  const data = product.data
+  console.log(data)
+  const [rating, setRating] = useState(product.data.review)
 
   return (
     <Flex justify={"space-between"} padding={"15px 50px"}>
       <Image width="100px" src={imagemItem}/>
       <Flex direction={"column"} justify={"space-around"}>
-        <Heading size={"md"}>{data.title}</Heading>
-        <Text>{data.formattedPrice}</Text>
-        <Text>Quantidade: 3</Text>
+        <Heading size={"md"}>{product.data.name}</Heading>
+        <Text>{product.data.price}</Text>
       </Flex>
       <Flex justify={"center"} align={"center"}>
         <StarIcon cursor={"pointer"} color={rating >= 1 ? "gold" : "grey"} onClick={ e => setRating(1)}/>
@@ -27,7 +29,8 @@ const HistoricCard = (props) => {
 }
 
 const Historic = () => {
-  const productList = JSON.parse(localStorage.getItem('productList'));
+  const [productList, setProductList] = useState([])
+  getHistoric(0).then(data => setProductList(data))
 
   return(
     <Card justify={"center"} align={"center"}>

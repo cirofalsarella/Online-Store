@@ -7,6 +7,8 @@ import { Card, CardHeader, CardBody, Button } from '@chakra-ui/react'
 
 import {DeleteIcon} from '@chakra-ui/icons'
 
+import { getCart, updateCart, addHistoric } from "../../../services"
+
 import imagemItem from "../../../assets/proMeal.png"
 import imagemPix from "../../../assets/pix.png"
 import imagemCartao from "../../../assets/cartao.png"
@@ -17,12 +19,15 @@ const delay = ms => new Promise(
 );
 
 const Cart = () => {
-  const [products, setProducts] = useState([
-    { id: 1, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:2, ammount:1 },
-    { id: 2, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:4, ammount:1 },
-    { id: 3, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:2, ammount:1 },
-    { id: 4, title: 'Barra de proteína super calórica', imageUrl: imagemItem, price: 'R$5,00', stock:1, ammount:1 },
-  ])
+  const id = localStorage.getItem('userId')
+  const [products, setProducts] = useState([])
+
+  try {
+    getCart(id).then(data => setProducts(data))
+  } catch (e) {
+    console.log(e)
+  }
+  
 
   const navigate = useNavigate();
   const [isLoadingShop, setLoadingShop] = useState(false)
@@ -39,7 +44,11 @@ const Cart = () => {
 
   const handleShop = async event => {
     setLoadingShop(true)
-    await delay(1000)
+
+    addHistoric(products, id)
+    updateCart({}, id)
+    
+    
     setLoadingShop(false)
 
     navigate("/")
@@ -47,6 +56,7 @@ const Cart = () => {
 
   const handleRemove = async event => {
     setProducts(products.filter((val) => {return val.id !== event}))
+    updateCart(products, id)
   }
 
 
@@ -56,18 +66,18 @@ const Cart = () => {
       {/* Item */}
       <Stack>
         {products.map((item) => (
-          <Card padding={"4"}>
+          <Card padding={"4"} width={"50vw"}>
             <Flex alignItems="center" justify='space-between'>
-              <Image src={item.imageUrl} maxW={{ base: '50%', sm: '100px' }}/>
+              <Image src={imagemItem} maxW={{ base: '50%', sm: '100px' }}/>
               
               <Stack>
                 <Text fontWeight="bold">{item.title}</Text>
-                <Text>{item.price}</Text>
+                <Text>R$ {item.price.toFixed(2)}</Text>
                 <Text>Estoque: {item.stock}</Text>
               </Stack>
 
               {/* Ammount selector */}
-              <NumberInput value={item.ammount} min={1} max={item.stock} width='10%'
+              <NumberInput value={item.ammount} min={1} max={item.stock} width='100px'
                 onChange={ e => { 
                   setProducts(
                     products.map((product) =>
