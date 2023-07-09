@@ -27,7 +27,13 @@ const schema = new Schema({
     stock : {
         type: Number,
         required: true,
-    }
+    },
+    reviews: [{
+        grade: {
+            type: Number,
+            required: true
+        }
+    }]
 })
 
 module.exports = mongoose.model('Item', schema);
