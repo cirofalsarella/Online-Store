@@ -30,3 +30,17 @@ const Auth = () => {
 } 
 
 export default Auth;
+
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const authenticate = async event => {
+  try {
+    await delay(1000);
+  }
+  catch (e) {
+      console.log(e)
+  }
+}
+
+
+
+
