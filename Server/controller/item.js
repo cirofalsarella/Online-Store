@@ -1,11 +1,12 @@
 const Item = require('../model/item');
 
 exports.post = async (req, res) => {
-    const { id, name, description, price, stock } = req.body;
+    const { id, name, img, description, price, stock } = req.body;
 
     const item = {
         id,
         name,
+        img,
         description,
         price,
         stock
@@ -49,11 +50,12 @@ exports.getById = async (req, res) => {
 exports.put = async (req, res) => {
     const pid = req.params.id;
 
-    const { id, name, description, price, stock } = req.body;
+    const { id, name, img, description, price, stock } = req.body;
 
     const item = {
         id,
         name,
+        img,
         description,
         price,
         stock
