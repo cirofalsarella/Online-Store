@@ -19,7 +19,7 @@ const Edit = () => {
 
     if (productId == "none") {
       setNew(true)
-      setProduct({ stock: 0, price: 0.0, description: "", name: "abc", img: "abc" })
+      setProduct({ stock: 0, price: 0.0, description: "", name: "", img: "abc" })
 
     } else {
       setNew(false)
