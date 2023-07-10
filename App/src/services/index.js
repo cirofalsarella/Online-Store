@@ -1,8 +1,7 @@
-// import { auth } from "./auth"
 import { getCart, updateCart } from "./cart"
 import { addHistoric, getHistoric, updateHistoric } from "./historic"
 import { createItem, getItem, getItemById, updateItem} from "./item"
-import { createUser, getUser, updateUser} from "./user"
+import { createUser, getUser, updateUser, auth} from "./user"
 
 export {
     createItem,
@@ -10,6 +9,7 @@ export {
     getItemById,
     updateItem,
 
+    auth,
     createUser,
     getUser,
     updateUser,

@@ -1,19 +1,27 @@
+const user = require('../model/user');
 const User = require('../model/user');
 
-exports.auth = async (rec, res) => {
-    const { email, password } = req.body;
+exports.get = async (req, res) => {
+    const email = req.params.email;
+    const password = req.params.password;
 
     try {
         const user = await User.findOne({ email: email, password:password })
         if (!user) {
-            res.status(404).json({ error:"auth error"});
+            res.status(404).send({ message:"auth error"});
             return;
         }
 
-        res.status(200).json();
-    } catch {
-        res.status(500).json({ error: error });
+        res.status(200).json(user);
+    } catch (error){
+        res.status(500).send({ 
+            message: "auth error",
+            data: error
+        });
+
     }
+
+    console.log(user)
 }
 
 exports.post = async (req, res) => {

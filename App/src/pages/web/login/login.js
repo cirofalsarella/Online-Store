@@ -6,7 +6,7 @@ import { Card, Flex, Image, Heading, Input, Button, Text } from "@chakra-ui/reac
 
 import ImagemLogo from "../../../assets/logo.png"
 
-import { getUser } from "../../../services"
+import { auth } from "../../../services"
 
 const delay = ms => new Promise(
   resolve => setTimeout(resolve, ms)
@@ -30,10 +30,11 @@ const Login = () => {
 
   const tryLogin = async event => {
     setLoading(true)
-    const attempt = await getUser(email);
-    console.log(attempt)
 
-    if (attempt !== null && password == attempt.password)
+    const attempt = await auth({email, password});
+      
+
+    if (attempt.message === "auth error")
       setInvalid(true)
     else {
       localStorage.setItem('userId', attempt.id);
