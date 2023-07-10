@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Box, Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Text, Button } from '@chakra-ui/react'
 import { NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 
-import { getItemById } from "../../../services"
+import { getItemById, updateCart } from "../../../services"
 
 import imagemItem from "../../../assets/proMeal.png"
 
@@ -15,21 +15,17 @@ const delay = ms => new Promise(
 );
 
 const Item = () => {
-  console.log(localStorage.getItem("selectedProduct"))
   const navigate = useNavigate();
   const [item, setItem] = useState({ ammount:0, price:0.00, description:"", name:"" })
+  const userId = localStorage.getItem("userId")
   
-  try {
-    getItemById(localStorage.getItem("selectedProduct")).then(data => {setItem(data)})
-  } catch {
-    setItem({
-      ammount:0,
-      price:0.00,
-      description:"",
-      name:""
-
-    })
-  }
+  useEffect(() => {
+    try {
+      getItemById(localStorage.getItem("selectedProduct")).then(data => {setItem(data)})
+    } catch {
+      setItem({ ammount:0, price:0.00, description:"", name:"" })
+    }
+  } ,[])
 
   const [isLoadingAdd, setLoadingAdd] = useState(false)
   const [isLoadingCart, setLoadingCart] = useState(false)
@@ -39,7 +35,7 @@ const Item = () => {
 
   const handleCart = async event => {
     setLoadingCart(true)
-    await delay(1000)
+    await delay(300)
     setLoadingCart(false)
 
     navigate("/cart")
@@ -49,13 +45,17 @@ const Item = () => {
     setLoadingDelivery(true)
     await delay(1000)
     setLoadingDelivery(false)
+    
     setVisibleDelivery(Math.random() * 50)
   }
 
   const handleAdd = async event => {
+    if (userId === 'none') navigate('/login')
+
     setLoadingAdd(true)
-    console.log("alfa")
-    await delay(1000)
+
+    await updateCart({user:userId, item:item.id, ammount:0})
+
     setLoadingAdd(false)
   }
 
@@ -86,11 +86,11 @@ const Item = () => {
                 {item.description}
               </Text>
 
-              <Stack direction='row' spacing='4' display='flex' alignItems='center'>
+              <Stack spacing='4' display='flex' alignItems='center'>
                 <Heading size='sm'>
                   R$ {item.price.toFixed(2)}
                 </Heading>
-                <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm' maxW='10%'>
+                <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm' width={"100px"}>
                   <NumberInputField />
                   <NumberInputStepper>
                     <NumberIncrementStepper />

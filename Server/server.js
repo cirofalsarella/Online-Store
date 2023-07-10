@@ -34,6 +34,7 @@ mongoose
     )
     .then(async () => {
         console.log("Successfully connected to MongoDB");
+        // await mongoose.connection.db.dropDatabase();
         app.listen(4000)
     })
     .catch((err) => console.log(err));

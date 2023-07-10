@@ -6,6 +6,8 @@ import { Card, Flex, Image, Heading, Input, Button, Text } from "@chakra-ui/reac
 
 import ImagemLogo from "../../../assets/logo.png"
 
+import { getUser } from "../../../services"
+
 const delay = ms => new Promise(
   resolve => setTimeout(resolve, ms)
 );
@@ -28,24 +30,16 @@ const Login = () => {
 
   const tryLogin = async event => {
     setLoading(true)
-    await delay(1000);
+    const attempt = await getUser(email);
+    console.log(attempt)
 
-    let userList = [];
-    let users = localStorage.getItem('userList');
-    if (users !== null){
-      userList = JSON.parse(users).filter((user) => {
-        return user.email === email && user.password === password
-      });
-    }
-    
-    if (!userList.length)  setInvalid(true)
+    if (attempt !== null && password == attempt.password)
+      setInvalid(true)
     else {
-      localStorage.setItem('userId', userList[0].id);
-      console.log(userList[0].id)
-
+      localStorage.setItem('userId', attempt.id);
       setHeaderDisplay(true)
       
-      if (userList[0].admin) {
+      if (attempt.admin) {
         setLoginStatus(2)
         return navigate("/home")
       }

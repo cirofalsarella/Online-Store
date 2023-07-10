@@ -6,6 +6,8 @@ import { Card, Flex, Image, Heading, Input, Button, FormControl, FormLabel, Form
 
 import ImagemLogo from "../../../assets/logo.png"
 
+import { createUser } from "../../../services"
+
 const delay = ms => new Promise(
   resolve => setTimeout(resolve, ms)
 );
@@ -34,36 +36,28 @@ const Register = () => {
     setLoading(true)
     await delay(1000)
 
-    let userList = JSON.parse(localStorage.getItem('userList'))
-    
     let isValid = true
     if (password !== passwordConfirmation) {
       isValid = false
       setPasswordDifferent(true)
     }
-    if (userList.find(x => x.email === email)) {
-      isValid = false
-      setOnUseEmail(true)
-    }
-    if (userList.find(x => x.cpf === cpf)) {
-      isValid = false
-      setOnUseCpf(true)
-    }
+    // if (userList.find(x => x.email === email)) {
+    //   isValid = false
+    //   setOnUseEmail(true)
+    // }
+    // if (userList.find(x => x.cpf === cpf)) {
+    //   isValid = false
+    //   setOnUseCpf(true)
+    // }
 
     
     if (isValid) {
-      userList.push({
-        "id": userList.length,
-        "username":"",
-        "email":email,
-        "cpf":cpf,
-        "address":"",
-        "password":password,
-        "admin":false
-      })
-      localStorage.setItem('userList', JSON.stringify(userList));
-
-      navigate("/login")
+      createUser({
+        email:email,
+        cpf:cpf,
+        password:password,
+        admin:false
+      }).then(navigate("/login"))
     }
 
     setLoading(false)

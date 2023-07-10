@@ -36,7 +36,6 @@ const schema = new Schema({
     historic: [{
         item: { 
             type: Number, 
-            required: true
         },
         review: {
             type: Number,
@@ -45,8 +44,6 @@ const schema = new Schema({
     cart: [{
         id: {
             type: Number, 
-            required: true,
-            unique: true
         },
         ammount: {
             type: Number,

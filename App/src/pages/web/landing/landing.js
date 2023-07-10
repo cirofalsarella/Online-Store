@@ -1,25 +1,23 @@
 import { ItemCard } from "../../../Components";
 import { Flex, Wrap, WrapItem } from "@chakra-ui/react"
 
+import { getItem } from "../../../services"
+import { useEffect, useState } from "react";
 
 const Landing = () => {
-  const selected = localStorage.getItem("selectedProduct");
-  
-  let productList = [];
-  let products = localStorage.getItem('productList');
-  
-  if(products !== null){
-      productList = JSON.parse(products);
-  }
-
+ 
+  const [itemList, setItemList] = useState([])
+  useEffect(() => {
+    getItem().then(data => setItemList(data))
+  }, [])
 
   return (
     <Flex direction="column">
         <Wrap spacing={"20px"} justify={"center"}>
-          {productList.map((product) => {
+          {itemList.map((item) => {
             return(
               <WrapItem width={"200px"}>
-                <ItemCard src={product}/>
+                <ItemCard src={item}/>
               </WrapItem>
             )
           })}

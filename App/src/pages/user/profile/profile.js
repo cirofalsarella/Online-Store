@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Historic from "./historic";
 
 import { Button, Card, Flex, FormControl, FormLabel, Heading, Input, Textarea, Avatar, Stack } from "@chakra-ui/react"
+import { getUser, updateUser } from "../../../services"
 
 const delay = ms => new Promise(
   resolve => setTimeout(resolve, ms)
@@ -14,31 +15,35 @@ const Profile = () => {
   const navigate = useNavigate();
   
   const [userId, setUserId] = useState(localStorage.getItem("userId"))
+  const [user, setUser] = useState({})
+  
   const [name, setName] = useState("")
   const [address, setAddress] = useState("")
-  const [isLoading, setLoading] = useState(false)
 
-  
-  let userList = JSON.parse(localStorage.getItem('userList'));
-  
-  const [user, setUser] = useState({})
+  const [isLoading, setLoading] = useState(false)
   
   useEffect(() => {
     if (userId === "none")  return navigate("/login");
 
-    setUser(userList[userId])
-    setName(user.username)
-    setAddress(user.address)
+    getUser(localStorage.getItem("userId")).then((data) => {
+      setUser(data)
+    }).then(() => {
+      setName(user.name)
+      setAddress(user.address)
+    })
   }, [userId])
 
   const handleUpdate = async event => {
     setLoading(true)
-    await delay(1000)
 
-    userList[userId].username = name
-    userList[userId].address = address
+    updateUser(    {
+      "name":"a",
+      "email":"ab",
+      "cpf":"12",
+      "admin":"true",
+      "password":"admin"
+  })
 
-    localStorage.setItem('userList', JSON.stringify(userList));
     setLoading(false)
 
     if (user.admin) return navigate("/home")

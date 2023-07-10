@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Box, Text, Image, Stack, Heading, Flex } from '@chakra-ui/react';
 import { Input, InputGroup, InputRightElement, NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
@@ -19,14 +19,16 @@ const delay = ms => new Promise(
 );
 
 const Cart = () => {
-  const id = localStorage.getItem('userId')
+  const userId = localStorage.getItem('userId')
   const [products, setProducts] = useState([])
 
-  try {
-    getCart(id).then(data => setProducts(data))
-  } catch (e) {
-    console.log(e)
-  }
+  useEffect(() => {
+    try {
+      getCart(userId).then(data => setProducts(data))
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
   
 
   const navigate = useNavigate();
@@ -45,8 +47,8 @@ const Cart = () => {
   const handleShop = async event => {
     setLoadingShop(true)
 
-    addHistoric(products, id)
-    updateCart({}, id)
+    addHistoric(products, userId)
+    updateCart({}, userId)
     
     
     setLoadingShop(false)
@@ -56,7 +58,7 @@ const Cart = () => {
 
   const handleRemove = async event => {
     setProducts(products.filter((val) => {return val.id !== event}))
-    updateCart(products, id)
+    updateCart(products, userId)
   }
 
 

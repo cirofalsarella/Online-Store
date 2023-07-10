@@ -7,15 +7,15 @@ const ItemCard = (props) => {
     const data = props.src
 
     const selectItem = () =>{
-        localStorage.setItem("selectedProduct", 3);
+        localStorage.setItem("selectedProduct", data.id);
     };
 
     return (
         <Link to={"/item"} onClick={selectItem}>
             <Card height={"300px"} direction={"column"} align={"center"} justify={"space-around"}>
                 <Image src={imagemItem} width={"60%"}/>
-                <Heading size="md" align={"center"}>{data.title}</Heading>
-                <Text>{data.formattedPrice}</Text>
+                <Heading size="md" align={"center"}>{data.name}</Heading>
+                <Text>R$ {data.price.toFixed(2)}</Text>
             </Card>
         </Link>
     )

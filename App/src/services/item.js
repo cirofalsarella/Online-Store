@@ -23,47 +23,52 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 
 const getItem = async event => {
+    let item = {}
+    
     try {
-        await delay(1000);
-    }
-    catch (e) {
+        item = await fetch('http://localhost:4000/item', { cache: "reload" })
+            .then(response => response.json());
+    } catch(e) {
         console.log(e)
     }
 
-    return itemList;
+    return item;
 }
 
 const getItemById = async event => {
-    let teste
+    let item = {}
+    
     try {
-        await delay(1000);
-        teste = itemList.find(match => {return match.id == event})
-
-        teste.reviewAvg = 0
-        teste.reviews.map(at => {teste.reviewAvg += at.grade})
-        teste.reviewAvg /= teste.reviews.length
-        teste.reviewCount = teste.reviews.length
-    }
-    catch (e) {
+        item = await fetch(`http://localhost:4000/item/${event}`, { cache: "reload" })
+            .then(response => response.json());
+    } catch(e) {
         console.log(e)
     }
 
-    return teste;
+    return item;
 }
 
 
 const createItem = async event => {
-    console.log(event)
+    let item = event
+    
     try {
-        await delay(1000);
-    }
-    catch (e) {
+        item = await fetch('http://localhost:4000/item/', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(item),
+        });
+    } catch(e) {
         console.log(e)
     }
+
+    return item
     
 }
 
-
+// TODO
 const updateItem = async event => {
     try {
         await delay(1000);

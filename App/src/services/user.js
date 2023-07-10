@@ -17,39 +17,56 @@ const userList = [
     }
 ]
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 
 const getUser = async event => {
+    let user = {}
+    
     try {
-        await delay(1000);
-    }
-    catch (e) {
+        user = await fetch(`http://localhost:4000/user/${event}`, { cache: "reload" })
+            .then(response => response.json());
+    } catch(e) {
         console.log(e)
     }
 
-    return userList;
+    return user;
 }
 
 const createUser = async event => {
+    let user = event
+    
     try {
-        await delay(1000);
-    }
-    catch (e) {
+        user = await fetch('http://localhost:4000/user/', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        });
+    } catch(e) {
         console.log(e)
     }
-    
+
+    return user
 }
 
 
 const updateUser = async event => {
+    let user = event
+
     try {
-        await delay(1000);
+        user = await fetch(`http://localhost:4000/user/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+            });    
     }
     catch (e) {
         console.log(e)
     }
-    
+
+    return user
 }
 
 export {

@@ -17,17 +17,18 @@ exports.auth = async (rec, res) => {
 }
 
 exports.post = async (req, res) => {
-    const { admin, email, cpf, password } = req.body;
+    const { email, admin, cpf, password } = req.body;
 
     const id = (await User.find()).length
 
     const user = {
         id,
-        admin,
         email,
         cpf,
-        password
+        password,
+        admin
     };
+    console.log(user)
 
     // other fields are not setted at begin
 
@@ -35,8 +36,10 @@ exports.post = async (req, res) => {
         await User.create(user);
         res.status(201).json({ message: 'User created' });
     } catch (error) {
-        res.status(500).json({ error: error });
+        res.status(500).json({ data: error });
+        console.log(error)
     }
+
 }
 
 exports.getById = async (req, res) => {

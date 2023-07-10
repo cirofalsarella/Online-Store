@@ -3,15 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Card, Flex, Heading, Image, Input } from '@chakra-ui/react';
 import Counter from '../../../Components/product/Counter';
 import imagemItem from '../../../assets/proMeal.png';
-import { createItem, getItemById } from '../../../services';
+
+import { getItemById, createItem, updateItem } from '../../../services'
 
 const Cadastre = () => {
   const navigate = useNavigate();
 
+  let isNew = false;
   let dbProduct;
   try {
     dbProduct = getItemById(localStorage.getItem('selectedProduct'));
   } catch {
+    isNew = true
+
     dbProduct = {
       ammount: 0,
       cost: 0.0,
@@ -42,7 +46,11 @@ const Cadastre = () => {
     formData.append('description', productDescription);
     formData.append('quantity', productQuantity);
 
-    await createItem(formData);
+    if (isNew) {
+      await createItem(formData);
+    } else {
+      await updateItem(formData)
+    }
     navigate('/home');
   };
 
