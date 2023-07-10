@@ -18,7 +18,6 @@ exports.auth = async (rec, res) => {
 
 exports.post = async (req, res) => {
     const { admin, email, cpf, password } = req.body;
-    console.log(req.body)
 
     const id = (await User.find()).length
 
@@ -59,31 +58,19 @@ exports.getById = async (req, res) => {
 }
 
 exports.put = async (req, res) => {
-    const pid = req.params.id;
-
-    const { id, name, email, cpf, password, address, historic, cart } = req.body;
-
-    const user = {
-        id,
-        name,
-        email,
-        cpf,
-        password,
-        address,
-        historic,
-        cart
-    };
+    const { name, address, cart, historic } = req.body;
 
     try {
-        const updatedUser = await User.update({ id: pid }, user);
-
-        if (updatedUser.matchedCount === 0) {
-            res.status(404).json({ error:"user was not found"});
-            return;
-        }
-
-        res.status(200).json(user);
-    } catch (error) {
-        res.status(500).json({ error: error });
+        await User.findOneAndUpdate({id: req.params.id}, {
+            $set: { name: name, address: address, cart: cart, historic: historic }
+        })
+        res.status(201).send({
+            message:"update ok!"
+        })
+    } catch(e) {
+        res.status(400).send({
+            message: "update faild",
+            data: e
+        })
     }
 }

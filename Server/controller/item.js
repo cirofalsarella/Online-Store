@@ -1,7 +1,8 @@
 const Item = require('../model/item');
 
+
 exports.post = async (req, res) => {
-    const { name, img, description, price, stock,reviews } = req.body;
+    const { name, img, description, price, stock } = req.body;
     const id = (await Item.find()).length
 
     const item = {
@@ -10,8 +11,7 @@ exports.post = async (req, res) => {
         img,
         description,
         price,
-        stock,
-        reviews
+        stock
     };
 
     try {
@@ -22,14 +22,18 @@ exports.post = async (req, res) => {
     }
 }
 
+
 exports.get = async (req, res) => {
+    let item
     try {
-        await Item.find();
+        item = await Item.find();
         res.status(200).json(item);
     } catch (error) {
         res.status(500).json({ error: error });
+        console.log(error)
     }
 }
+
 
 exports.getById = async (req, res) => {
     const id = req.params.id;
@@ -49,31 +53,21 @@ exports.getById = async (req, res) => {
     }
 }
 
+
 exports.put = async (req, res) => {
-    const pid = req.params.id;
-
-    const { id, name, img, description, price, stock,reviews } = req.body;
-
-    const item = {
-        id,
-        name,
-        img,
-        description,
-        price,
-        stock,
-        reviews
-    };
+    const { description, price, stock, reviews } = req.body;
 
     try {
-        const updatedItem = await Item.update({ id: pid }, item);
-
-        if (updatedItem.matchedCount === 0) {
-            await Item.create(item);
-            res.status(201).json({ message: 'No itens found, a new one was created' });
-        }
-
-        res.status(200).json(item);
-    } catch (error) {
-        res.status(500).json({ error: error });
+        await User.findOneAndUpdate({id: req.params.id}, {
+            $set: { description: description, price: price, stock: stock, reviews: reviews }
+        })
+        res.status(201).send({
+            message:"update ok!"
+        })
+    } catch(e) {
+        res.status(400).send({
+            message: "update faild",
+            data: e
+        })
     }
 }

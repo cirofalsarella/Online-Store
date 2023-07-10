@@ -27,6 +27,9 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    name :{
+        type: String, 
+    },
     address: {
         type: String, 
     },
