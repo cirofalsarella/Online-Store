@@ -1,5 +1,5 @@
 import { getCart, updateCart, cleanCart } from "./cart"
-import { addHistoric, getHistoric, updateHistoric } from "./historic"
+import { addHistoric, getHistoric, updateHistoric, addReview } from "./historic"
 import { createItem, getItem, getItemById, updateItem} from "./item"
 import { createUser, getUser, updateUser, auth} from "./user"
 
@@ -20,5 +20,6 @@ export {
 
     addHistoric,
     getHistoric,
-    updateHistoric
+    updateHistoric,
+    addReview
 }

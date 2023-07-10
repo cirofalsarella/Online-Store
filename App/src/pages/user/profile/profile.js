@@ -93,7 +93,7 @@ const Profile = () => {
 
       </Flex>
 
-      <Historic />
+      <Historic userId={userId} />
     </Stack>
   );
 }

@@ -48,7 +48,7 @@ const Cart = () => {
   const handleShop = async event => {
     setLoadingShop(true)
 
-    addHistoric(products, userId)
+    addHistoric({itemList:products, userId:userId})
     cleanCart(userId)    
     
     setLoadingShop(false)

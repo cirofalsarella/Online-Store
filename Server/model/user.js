@@ -34,7 +34,7 @@ const schema = new Schema({
         type: String, 
     },
     historic: [{
-        item: { 
+        id: { 
             type: Number, 
         },
         review: {
