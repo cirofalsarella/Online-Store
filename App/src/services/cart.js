@@ -22,7 +22,7 @@ const updateCart = async event => {
     let item = {id: event.item, ammount: event.ammount}
     let user = await getUser(event.user)
 
-    let newCart = {cart: [{...user.cart, ...item}]}
+    let newCart = {cart: [...user.cart, item]}
 
     try {
         await fetch(`http://localhost:4000/user/${user.id}`, {
