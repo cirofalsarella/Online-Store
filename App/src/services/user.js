@@ -55,7 +55,7 @@ const updateUser = async event => {
                 headers: {
                 'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(user),
+                body: JSON.stringify({name: user.name, address: user.address}),
             });    
     }
     catch (e) {

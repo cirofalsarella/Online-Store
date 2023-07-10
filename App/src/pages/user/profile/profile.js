@@ -25,24 +25,24 @@ const Profile = () => {
   useEffect(() => {
     if (userId === "none")  return navigate("/login");
 
-    getUser(localStorage.getItem("userId")).then((data) => {
+    getUser(userId).then((data) => {
       setUser(data)
-    }).then(() => {
-      setName(user.name)
-      setAddress(user.address)
     })
   }, [userId])
+
+  useEffect(() => {
+    setName(user.name)
+    setAddress(user.address)
+  }, [user])
 
   const handleUpdate = async event => {
     setLoading(true)
 
-    updateUser(    {
-      "name":"a",
-      "email":"ab",
-      "cpf":"12",
-      "admin":"true",
-      "password":"admin"
-  })
+    updateUser({
+      name: name,
+      address: address,
+      id: userId
+    })
 
     setLoading(false)
 
