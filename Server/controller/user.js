@@ -61,7 +61,7 @@ exports.getById = async (req, res) => {
 exports.put = async (req, res) => {
     const pid = req.params.id;
 
-    const { id, name, email, cpf, password, username, address, historic, cart } = req.body;
+    const { id, name, email, cpf, password, address, historic, cart } = req.body;
 
     const user = {
         id,
@@ -69,7 +69,6 @@ exports.put = async (req, res) => {
         email,
         cpf,
         password,
-        username,
         address,
         historic,
         cart
