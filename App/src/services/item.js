@@ -68,14 +68,28 @@ const createItem = async event => {
     
 }
 
-// TODO
 const updateItem = async event => {
+    let item
+
     try {
-        await delay(1000);
+        item = await fetch(`http://localhost:4000/item/${event.id}`, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    price: event.price,
+                    address: event.address,
+                    img: event.img,
+                    stock: event.stock
+                }),
+            });    
     }
     catch (e) {
         console.log(e)
     }
+
+    return item
     
 }
 

@@ -18,7 +18,6 @@ const Product = () => {
       price:0.00,
       description:"",
       name:""
-
     })
   }
 

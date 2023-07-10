@@ -58,7 +58,7 @@ exports.put = async (req, res) => {
     const { description, price, stock, reviews } = req.body;
 
     try {
-        await User.findOneAndUpdate({id: req.params.id}, {
+        await Item.findOneAndUpdate({id: req.params.id}, {
             $set: { description: description, price: price, stock: stock, reviews: reviews }
         })
         res.status(201).send({
