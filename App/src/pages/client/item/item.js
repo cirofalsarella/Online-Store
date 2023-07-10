@@ -144,8 +144,7 @@ const Item = () => {
             >
               Adicionar ao carrinho
             </Button>
-            <Button colorScheme='orange' variant='solid'
-                    isLoading={isLoadingCart} loadingText='Loading' onClick={handleCart}
+            <Button colorScheme='orange' variant='solid' onClick={handleCart}
             >
               Ir para o carrinho
             </Button>
