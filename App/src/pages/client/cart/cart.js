@@ -5,8 +5,6 @@ import { Box, Text, Image, Stack, Heading, Flex } from '@chakra-ui/react';
 import { Input, InputGroup, InputRightElement, NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { Card, CardHeader, CardBody, Button } from '@chakra-ui/react'
 
-import {DeleteIcon} from '@chakra-ui/icons'
-
 import { getCart, updateCart, addHistoric } from "../../../services"
 
 import imagemItem from "../../../assets/proMeal.png"
@@ -28,10 +26,13 @@ const Cart = () => {
     } catch (e) {
       console.log(e)
     }
-  }, [])
+
+    console.log("ok")
+  }, [userId])
   
 
   const navigate = useNavigate();
+
   const [isLoadingShop, setLoadingShop] = useState(false)
   const [isLoadingDelivery, setLoadingDelivery] = useState(false)
   const [isVisibleDelivery, setVisibleDelivery] = useState(null)
@@ -56,16 +57,11 @@ const Cart = () => {
     navigate("/")
   }
 
-  const handleRemove = async event => {
-    setProducts(products.filter((val) => {return val.id !== event}))
-    updateCart(products, userId)
-  }
 
+  if (!products.length) return  <Card>Carrinho vazio.</Card>
 
   return (
     <Flex justify={"center"} gap='4'>
-  
-      {/* Item */}
       <Stack>
         {products.map((item) => (
           <Card padding={"4"} width={"50vw"}>
@@ -94,8 +90,6 @@ const Cart = () => {
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
-
-              <DeleteIcon boxSize={6} cursor={"pointer"} onClick={e => handleRemove(item.id)}/>
 
             </Flex>
           </Card>
