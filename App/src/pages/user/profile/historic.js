@@ -7,7 +7,6 @@ import { getHistoric, updateHistoric } from "../../../services"
 
 const HistoricCard = (product) => {
   const data = product.data
-  console.log(data)
   const [rating, setRating] = useState(product.data.review)
 
   return (

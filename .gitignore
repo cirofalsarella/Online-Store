@@ -5,3 +5,5 @@
 /App/.pnp
 /App.pnp.js
 
+/Server/node_modules
+/node_modules
