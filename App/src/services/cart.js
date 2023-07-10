@@ -19,13 +19,11 @@ const getCart = async event => {
 
 
 const updateCart = async event => {
-    console.log("e ")
-    console.log(event)
     let item = {id: event.item, ammount: event.ammount}
     let user = await getUser(event.user)
 
     let newCart = {cart: [{...user.cart, ...item}]}
-    console.log(newCart)
+
     try {
         await fetch(`http://localhost:4000/user/${user.id}`, {
                 method: 'PUT',
@@ -40,8 +38,23 @@ const updateCart = async event => {
     }
 }
 
+const cleanCart = async event => {
+    try {
+        await fetch(`http://localhost:4000/user/${event}`, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({cart:[]})
+            });    
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
 
 export {
     getCart,
-    updateCart
+    updateCart,
+    cleanCart
 }

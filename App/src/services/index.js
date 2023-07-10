@@ -1,4 +1,4 @@
-import { getCart, updateCart } from "./cart"
+import { getCart, updateCart, cleanCart } from "./cart"
 import { addHistoric, getHistoric, updateHistoric } from "./historic"
 import { createItem, getItem, getItemById, updateItem} from "./item"
 import { createUser, getUser, updateUser, auth} from "./user"
@@ -16,6 +16,7 @@ export {
 
     getCart,
     updateCart,
+    cleanCart,
 
     addHistoric,
     getHistoric,

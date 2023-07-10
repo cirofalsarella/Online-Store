@@ -28,16 +28,11 @@ const Item = () => {
   } ,[])
 
   const [isLoadingAdd, setLoadingAdd] = useState(false)
-  const [isLoadingCart, setLoadingCart] = useState(false)
 
   const [isLoadingDelivery, setLoadingDelivery] = useState(false)
   const [isVisibleDelivery, setVisibleDelivery] = useState(null)
 
   const handleCart = async event => {
-    setLoadingCart(true)
-    await delay(300)
-    setLoadingCart(false)
-
     navigate("/cart")
   }
 
@@ -54,7 +49,7 @@ const Item = () => {
 
     setLoadingAdd(true)
 
-    await updateCart({user:userId, item:item.id, ammount:0})
+    await updateCart({user:userId, item:item.id, ammount:1})
 
     setLoadingAdd(false)
   }
