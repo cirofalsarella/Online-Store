@@ -11,7 +11,7 @@ const Edit = () => {
 
   const productId = localStorage.getItem('selectedProduct')
   const [isNew, setNew] = useState()
-  const [product, setProduct] = useState({ ammount: 0, cost: 0.0, description: '', name: '' })
+  const [product, setProduct] = useState({ stock: 0, price: 0.0, description: "", name: "abc", img: "abc" })
 
   localStorage.getItem('selectedProduct')
   useEffect(() => {
@@ -19,7 +19,7 @@ const Edit = () => {
 
     if (productId == "none") {
       setNew(true)
-      setProduct({ ammount: 0, cost: 0.0, description: '', name: '' })
+      setProduct({ stock: 0, price: 0.0, description: "", name: "abc", img: "abc" })
 
     } else {
       setNew(false)
@@ -39,6 +39,7 @@ const Edit = () => {
     console.log(product)
 
     if (isNew) {
+      console.log(product)
       await createItem(product);
     } else {
       await updateItem(product)
@@ -49,7 +50,7 @@ const Edit = () => {
   return (
       <Flex justify="center" align="center">
         <Card width="70vw" height="70vh" direction="column" align="center">
-          <Heading margin="10px">Adição de Produtos</Heading>
+          <Heading margin="10px">Edição de Produtos</Heading>
 
           <Flex justify="space-around">
             <Flex width="40vw" height="55vh" direction="column" justify="space-around">

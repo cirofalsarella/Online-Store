@@ -16,9 +16,14 @@ exports.post = async (req, res) => {
 
     try {
         await Item.create(item);
-        res.status(201).json({ message: 'Item created' });
+        res.status(201).send({ 
+            message: 'Item created'
+        });
     } catch (error) {
-        res.status(500).json({ error: error });
+        res.status(500).send({ 
+            message: 'error on creation',
+            data: error 
+        });
     }
 }
 

@@ -1,6 +1,6 @@
 import { Box, Card, CardBody, Flex, Image, Stack, Heading, Button } from '@chakra-ui/react'
 import imagemItem from "../../../assets/proMeal.png"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from 'react'
 
 import { getItem } from "../../../services"
@@ -40,6 +40,8 @@ const ProductCard = ({ name, price, id }) => {
 
 
 const Home = () => {
+  const navigate = useNavigate()
+
   const [items, setItems] = useState([])
   
   try {
@@ -48,8 +50,14 @@ const Home = () => {
     console.log(e)
   }
 
+  const handleAdd = () => {
+    localStorage.setItem('selectedProduct', "none");
+    navigate("/edit")
+  }
+
   return (    
     <Box maxHeight='100%'>
+      <Button onClick={handleAdd}>ADD NEW</Button>
       <Flex direction='row' gap='2rem' wrap={'wrap'}  alignItems="center">      
         {
           items.map( (product, i) =>{
