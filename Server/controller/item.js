@@ -1,7 +1,8 @@
 const Item = require('../model/item');
 
 exports.post = async (req, res) => {
-    const { id, name, img, description, price, stock,reviews } = req.body;
+    const { name, img, description, price, stock,reviews } = req.body;
+    const id = (await Item.find()).length
 
     const item = {
         id,

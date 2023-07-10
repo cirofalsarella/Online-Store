@@ -17,7 +17,10 @@ exports.auth = async (rec, res) => {
 }
 
 exports.post = async (req, res) => {
-    const { id, admin, email, cpf, password } = req.body;
+    const { admin, email, cpf, password } = req.body;
+    console.log(req.body)
+
+    const id = (await User.find()).length
 
     const user = {
         id,
