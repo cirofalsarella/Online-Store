@@ -1,4 +1,4 @@
-import { ItemCard } from "../../../Components";
+import { ItemCard } from "../../../components";
 import { Flex, Wrap, WrapItem } from "@chakra-ui/react"
 
 

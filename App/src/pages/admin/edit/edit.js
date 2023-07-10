@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Button, Card, Flex, Heading, Image, Input } from '@chakra-ui/react';
 
-import Counter from '../../../Components/product/Counter';
+import Counter from '../../../components/product/counter';
 import imagemItem from "../../../assets/proMeal.png";
 
 import { createItem, getItemById } from "../../../services"
