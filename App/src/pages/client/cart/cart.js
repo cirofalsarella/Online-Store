@@ -59,6 +59,10 @@ const Cart = () => {
     navigate("/")
   }
 
+  const handleClean = async event => {
+    cleanCart(userId)    
+    navigate("/")
+  }
 
   if (!products.length) return  <Card>Carrinho vazio.</Card>
 
@@ -150,6 +154,7 @@ const Cart = () => {
         </Card>
 
         <Button colorScheme='orange' variant='solid' isLoading={isLoadingShop} loadingText='Loading' onClick={handleShop}>Finalizar pedido</Button>
+        <Button colorScheme='orange' variant='solid' onClick={handleClean}>Limpar Carrinho</Button>
 
       </Stack>
 
