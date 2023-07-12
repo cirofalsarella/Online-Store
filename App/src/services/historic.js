@@ -4,7 +4,7 @@ import { getUser } from "./user"
 
 const getHistoric = async event => {
     const storeItems = await fetch("http://localhost:4000/item", {cache: "reload"}).then(response => response.json());;
-    const historicItems = (await fetch(`http://localhost:4000/user/${event.userId}`, {cache: "reload"}).then(response => response.json())).historic
+    const historicItems = (await fetch(`http://localhost:4000/user/${event.userId}`, {cache: "reload"}).then(response => response.json())).historic || [];
 
     let historic = []
     for (const item of historicItems) {
