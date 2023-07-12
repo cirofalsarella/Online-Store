@@ -1,4 +1,4 @@
-# Produtos CIV
+ # Produtos CIV
 
 ## Sobre
 Desenvolvimento de um site para venda de produtos de sobrevivência na natureza para a disciplina de *Introdução ao Desenvolvimento Web (SCC0219)*.
@@ -59,12 +59,27 @@ A persistência de dados é feito usando arquivos jsons que ficam localizados ju
 
 ## Plano de Testes
 
+Os testes foram feitos manualmente seguindo dois fluxos:
+
+* Logando como administrador:
+admin@civ.com, senha admin. Editando o produto (CRUD).
+Editando o nome.
+
+* Logando como usuário:
+Adicionado um item no carrinho (com quantidade inferior e superior ao estoque) e simulando uma compra.
+Editando as informações (nome, email etc.)
+
+
 ## Resultado dos Testes
 
 ## Instalação
 Instale o NPM: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/
 Instale o NodeJS: https://nodejs.org/en/download
-Execute npm build na no arquivo app.js
+Baixe o projeto
+Edite o arquivo Server.json na pasta Server/ para incluir sua instância do MongoDB
+Execute o Mongo DB
+Na pasta Server/ execute npm install, npm run
+Na pasta App/ execute npm install, npm run
 
 ## Dificuldades
 A maior dificuldade foi a persistência dos dados, em um primeiro momento pensamos em usar o Context do React, porém pela dificuldades optamos em usar um arquivo JSON com as informações.
