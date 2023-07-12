@@ -31,6 +31,7 @@ app.use('/item', itemView)
 mongoose
     .connect(
         `mongodb+srv://admin:admin@cluster0.ddpxtbf.mongodb.net/?retryWrites=true&w=majority`
+        // `mongodb://127.0.0.1:27017/?directConnection=true`
     )
     .then(async () => {
         console.log("Successfully connected to MongoDB");
