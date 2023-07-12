@@ -61,13 +61,13 @@ A persistência de dados é feito usando arquivos jsons que ficam localizados ju
 
 Os testes foram feitos manualmente seguindo dois fluxos:
 
-* Logando como administrador:
-admin@civ.com, senha admin. Editando o produto (CRUD).
-Editando o nome.
+**Logando como administrador:**
+* admin@civ.com, senha admin. Editando o produto (CRUD).
+* Editando o nome.
 
-* Logando como usuário:
-Adicionado um item no carrinho (com quantidade inferior e superior ao estoque) e simulando uma compra.
-Editando as informações (nome, email etc.)
+**Logando como usuário:**
+* Adicionado um item no carrinho (com quantidade inferior e superior ao estoque) e simulando uma compra.
+* Editando as informações (nome, email etc.)
 
 
 ## Resultado dos Testes
