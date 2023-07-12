@@ -5,7 +5,7 @@ import { Box, Text, Image, Stack, Heading, Flex } from '@chakra-ui/react';
 import { Input, InputGroup, InputRightElement, NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import { Card, CardHeader, CardBody, Button } from '@chakra-ui/react'
 
-import { getCart, updateCart, cleanCart, addHistoric } from "../../../services"
+import { getCart, updateCart, cleanCart, addHistoric, updateItem } from "../../../services"
 
 import imagemItem from "../../../assets/proMeal.png"
 import imagemPix from "../../../assets/pix.png"
@@ -49,6 +49,9 @@ const Cart = () => {
     setLoadingShop(true)
 
     addHistoric({itemList:products, userId:userId})
+    products.map((item) => {
+      updateItem({id:(item.id), stock: (item.stock - item.ammount)})
+    })
     cleanCart(userId)    
     
     setLoadingShop(false)
