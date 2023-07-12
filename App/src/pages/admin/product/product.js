@@ -39,13 +39,6 @@ const Product = () => {
       </Card>
       
       <Stack>
-        <Card>
-          <Stack>
-            <CardHeader>
-              <Heading size='md'>Avaliação</Heading>
-            </CardHeader>
-          </Stack>
-        </Card>
         <Button colorScheme='orange' variant='solid' sx={{ minWidth: '200px' }} onClick={e => {return navigate('/home')}}>
           Voltar
         </Button>

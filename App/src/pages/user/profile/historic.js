@@ -17,7 +17,7 @@ const HistoricCard = (props) => {
       <Image width="100px" src={imagemItem}/>
       <Flex direction={"column"} justify={"space-around"}>
         <Heading size={"md"}>{product.name}</Heading>
-        <Text>{product.price}</Text>
+        <Text>R$ {product.price.toFixed(2)}</Text>
       </Flex>
       <Flex justify={"center"} align={"center"}>
         <StarIcon cursor={"pointer"} color={rating >= 1 ? "gold" : "grey"} onClick={ e => setRating(1)}/>

@@ -87,22 +87,6 @@ const Item = () => {
                 </Heading>
               </Stack>
             </CardBody>
-
-            <CardFooter>
-              <Box display='flex' mt='2' alignItems='center'>
-                {Array(5)
-                  .fill('')
-                  .map((_, i) => (
-                    <StarIcon
-                      key={i}
-                      color={i < item.reviewAvg ? 'teal.500' : 'gray.300'}
-                    />
-                  ))}
-                <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-                  {item.reviewCount} reviews
-                </Box>
-              </Box>
-            </CardFooter>
           </Stack>
         </Card>
         <Box>

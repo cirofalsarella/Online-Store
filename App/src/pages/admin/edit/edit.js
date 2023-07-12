@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Flex, Heading, Image, Input, Text } from '@chakra-ui/react';
-import Counter from '../../../Components/product/Counter';
+import { InputGroup, InputRightElement, NumberInput, NumberInputField, NumberIncrementStepper, NumberDecrementStepper, NumberInputStepper} from '@chakra-ui/react'
 import imagemItem from '../../../assets/proMeal.png';
 
 import { getItemById, createItem, updateItem } from '../../../services'
@@ -66,7 +66,21 @@ const Edit = () => {
                   onChange={(e) => setProduct({...product, "description": e.target.value})}
               />
               <Text>Estoque:</Text>
-              <Counter />
+
+              <NumberInput value={product.stock} min={0} width='100px'
+                onChange={ e => { 
+                  setProduct(
+                      { ...product, stock:e }
+                  );
+                }}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+
             </Flex>
 
             <Flex width="20vw" direction="column" justify="space-between" align="center">
