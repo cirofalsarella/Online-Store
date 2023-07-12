@@ -3,7 +3,7 @@ import { StarIcon } from '@chakra-ui/icons'
 import imagemItem from "../../../assets/proMeal.png"
 import { useNavigate } from "react-router-dom";
 
-import { getItemById} from "../../../services"
+import { getItemById } from "../../../services"
 import { useState } from 'react'
 
 const Product = () => {
@@ -44,20 +44,6 @@ const Product = () => {
             <CardHeader>
               <Heading size='md'>Avaliação</Heading>
             </CardHeader>
-            <CardBody>
-              <Box display='flex' mt='2' alignItems='center'>
-                <Flex justify={"center"} align={"center"}>
-                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 1 ? "gold" : "grey"}/>
-                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 2 ? "gold" : "grey"}/>
-                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 3 ? "gold" : "grey"}/>
-                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 4 ? "gold" : "grey"}/>
-                  <StarIcon cursor={"pointer"} color={item.reviewAvg >= 5 ? "gold" : "grey"}/>
-                </Flex>
-                <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-                  {item.reviewCount} reviews
-                </Box>
-              </Box>
-            </CardBody>
           </Stack>
         </Card>
         <Button colorScheme='orange' variant='solid' sx={{ minWidth: '200px' }} onClick={e => {return navigate('/home')}}>
