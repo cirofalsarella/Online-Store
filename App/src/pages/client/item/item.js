@@ -85,13 +85,6 @@ const Item = () => {
                 <Heading size='sm'>
                   R$ {item.price.toFixed(2)}
                 </Heading>
-                <NumberInput step={1} defaultValue={1} min={0} max={30} size='sm' width={"100px"}>
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
               </Stack>
             </CardBody>
 
