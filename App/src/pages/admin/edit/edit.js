@@ -29,11 +29,6 @@ const Edit = () => {
     }
   }, [productId])
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    // setProductImage(file); 
-  };
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(product)
@@ -45,7 +40,7 @@ const Edit = () => {
       await updateItem(product)
     }
     navigate('/home');
-  };
+  }
 
   return (
       <Flex justify="center" align="center">
@@ -81,7 +76,6 @@ const Edit = () => {
                   Enviar
                 </Button>
               </Flex>
-              <input type="file" accept="image/*" onChange={handleImageUpload} /> {/* Image upload input */}
             </Flex>
           </Flex>
         </Card>
