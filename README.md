@@ -55,7 +55,7 @@ O Mockup possui:
 
 
 ## Comentários Sobre o Código
-A persistência de dados é feito usando arquivos jsons que ficam localizados junto aos arquivos do navegador utilizado, variando por navegador.
+A persistência de dados é feito usando o banco de dados MongoDB diretamente do servidor Atlas.
 
 ## Plano de Testes
 
@@ -70,8 +70,6 @@ Os testes foram feitos manualmente seguindo dois fluxos:
 * Editando as informações (nome, email etc.)
 
 
-## Resultado dos Testes
-
 ## Instalação
 Instale o NPM: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/
 Instale o NodeJS: https://nodejs.org/en/download
@@ -83,6 +81,3 @@ Na pasta App/ execute npm install, npm run
 
 ## Dificuldades
 A maior dificuldade foi a persistência dos dados, em um primeiro momento pensamos em usar o Context do React, porém pela dificuldades optamos em usar um arquivo JSON com as informações.
-
-## Comentários
-
